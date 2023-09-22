@@ -1,0 +1,23 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "standard-with-typescript",
+        "plugin:react/recommended",
+        "plugin:react/jsx-runtime"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2023,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "eslint-plugin-react"
+    ],
+    "rules": {
+        "react/jsx-filename-extensions": [1 , { "extensions": [".ts", ".tsx"] }],
+        "indent": ["error", 2]
+    }
+}

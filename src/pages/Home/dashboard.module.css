@@ -1,0 +1,14 @@
+.main {
+    max-width: 1280px;
+    width: 100%;
+
+    display: flex;
+    margin: 0 auto;
+
+    padding-top: 25px;
+}
+
+.title {
+    color: rgb(58, 58, 58);
+    font-size: 22px;
+}
