@@ -33,70 +33,70 @@ export function Header (): JSX.Element {
   }
 
   return (
-        <Container>
-            <div className="box-header">
+    <Container>
+      <div className="box-header">
 
-                <Link to={'/'}>
-                    <h1 className="title" onClick={toogleResetNav}>
+        <Link to={'/'}>
+          <h1 className="title" onClick={toogleResetNav}>
                         Rota Aérea
-                    </h1>
-                </Link>
+          </h1>
+        </Link>
 
-                <NavList>
-                        <Link to={'/'} onClick={toogleResetNav}>
-                            <Items chieldren={<AiOutlineDashboard/>} name="Painel"/>
-                        </Link>
+        <NavList>
+          <Link to={'/'} onClick={toogleResetNav}>
+            <Items chieldren={<AiOutlineDashboard/>} name="Painel"/>
+          </Link>
 
-                        <div className="item" onClick={toogleUtilidades}>
-                            <Items chieldren={<HiOutlinePencilAlt />} name="Utilidades"/>
-                        </div>
+          <div className="item" onClick={toogleUtilidades}>
+            <Items chieldren={<HiOutlinePencilAlt />} name="Utilidades"/>
+          </div>
 
-                        <div className="item" onClick={toogleAdmin}>
-                            <Items chieldren={<MdOutlineAdminPanelSettings/>} name="Admin"/>
-                        </div>
-                </NavList>
+          <div className="item" onClick={toogleAdmin}>
+            <Items chieldren={<MdOutlineAdminPanelSettings/>} name="Admin"/>
+          </div>
+        </NavList>
 
-                <MenuUser>
-                    <BiUserCircle className="icon" />
-                    <h6>Maciel</h6>
-                </MenuUser>
+        <MenuUser>
+          <BiUserCircle className="icon" />
+          <h6>Maciel</h6>
+        </MenuUser>
+      </div>
+
+      {utilidades
+        ? (
+
+          <Dropdown>
+            <div className='slider'>
+              <Link to={'/noticias'}>
+                <ItemsDropdown chieldren={<BiNews/>} name="Noticias"/>
+              </Link>
+
+              <Link to={'/categories'}>
+                <ItemsDropdown chieldren={<HiOutlineDocumentDuplicate/>} name="Categorias"/>
+              </Link>
             </div>
+          </Dropdown>
 
-            {utilidades
-              ? (
+        )
+        : null}
 
-            <Dropdown>
-               <div className='slider'>
-                    <Link to={'/noticias'}>
-                        <ItemsDropdown chieldren={<BiNews/>} name="Noticias"/>
-                    </Link>
+      {admin
+        ? (
 
-                    <Link to={'/categories'}>
-                        <ItemsDropdown chieldren={<HiOutlineDocumentDuplicate/>} name="Categorias"/>
-                    </Link>
-               </div>
-            </Dropdown>
+          <Dropdown>
+            <div className="slider">
+              <Link to={'/usuarios'}>
+                <ItemsDropdown chieldren={<FiUsers />} name="Usuarios"/>
+              </Link>
 
-                )
-              : null}
+              <Link to={'/configuracao'}>
+                <ItemsDropdown chieldren={<GrDocumentConfig />} name="Configuração"/>
+              </Link>
+            </div>
+          </Dropdown>
 
-            {admin
-              ? (
-
-            <Dropdown>
-               <div className="slider">
-                    <Link to={'/usuarios'}>
-                        <ItemsDropdown chieldren={<FiUsers />} name="Usuarios"/>
-                    </Link>
-
-                    <Link to={'/configuracao'}>
-                        <ItemsDropdown chieldren={<GrDocumentConfig />} name="Configuração"/>
-                    </Link>
-               </div>
-            </Dropdown>
-
-                )
-              : null}
-        </Container>
+        )
+        : null}
+    </Container>
   )
 }

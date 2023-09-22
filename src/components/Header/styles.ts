@@ -58,6 +58,7 @@ export const Dropdown = styled.div`
     background-color: #ffffff;
     height: 48px;
     width: 100%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 
     .slider {
         max-width: 1280px;

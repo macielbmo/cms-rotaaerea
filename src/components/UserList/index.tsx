@@ -4,7 +4,7 @@ import { HiMiniMagnifyingGlass } from 'react-icons/hi2'
 
 import { Container } from './styles'
 
-import { UserDelete } from '../modal/userDelete'
+import { UserDelete } from '../Modais/userDelete'
 
 interface UserListProps {
   users: [{

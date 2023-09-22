@@ -1,12 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import { Login } from './pages/login'
-import { Dashboard } from './pages/dashboard'
+import { Login } from './pages/Login'
+import { Home } from './pages/Home'
 import { Layout } from './components/Layout'
-import { Users } from './pages/users'
+import { Users } from './pages/Users'
 import { Admin } from './pages/Admin'
-import { Categories } from './pages/categories'
-import { News } from './pages/news'
+import { Categories } from './pages/Categories'
+import { News } from './pages/News'
 
 const router = createBrowserRouter([
   {
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
 
       {
         path: '/',
-        element: <Dashboard />
+        element: <Home />
       },
       {
         path: '/usuarios',

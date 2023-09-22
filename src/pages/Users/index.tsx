@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { UserList } from '../../components/UserList'
 import styles from './users.module.css'
-import { UserRegistration } from '../../components/modal/userRegistration'
+import { UserRegistration } from '../../components/Modais/userRegistration'
 
 export function Users (): JSX.Element {
   const [modal, setModal] = useState(false)
