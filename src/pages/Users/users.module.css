@@ -1,7 +1,7 @@
 .main {
     max-width: 1280px;
     width: 100%;
-    
+
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -17,7 +17,7 @@
     margin: 20px 0;
     padding-right: 12px ;
     border-right: 1px solid #a0a0a0;
-    color: #6389fd;
+    color: #7e9fff;
 }
 
 .title p {
@@ -41,5 +41,5 @@
 }
 
 .btnNewNews button:hover {
-    background-color: #dbffd8;
+    background-color: #b0c6ff;
 }

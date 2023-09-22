@@ -12,6 +12,7 @@ interface UserListProps {
     name: string
     email: string
     cpf: string
+    type: string
   }]
 }
 
@@ -27,10 +28,10 @@ export function UserList ({ users }: UserListProps): JSX.Element {
       <table>
         <thead>
           <tr className='row'>
-            <th>id</th>
             <th>Nome</th>
             <th>Email</th>
             <th>CPF</th>
+            <th>Tipo</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -38,10 +39,10 @@ export function UserList ({ users }: UserListProps): JSX.Element {
         {users.map((user) => (
           <tbody key={user.id}>
             <tr className='row'>
-              <td>{user.id}</td>
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>{user.cpf}</td>
+              <td>{user.type}</td>
               <td className='action'>
                 <div className="btn-action"><BsPencil data-id={user.id}/></div>
                 <div className="btn-action"><BsTrash2 onClick={toggleDelete} data-id={user.id}/></div>

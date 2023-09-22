@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { UserList } from '../../components/UserList'
 import styles from './users.module.css'
 import { UserRegistration } from '../../components/Modais/userRegistration'
+import Search from '../../components/inputs/Search'
 
 export function Users (): JSX.Element {
   const [modal, setModal] = useState(false)
@@ -41,6 +42,7 @@ export function Users (): JSX.Element {
           <UserRegistration setModal={toggleModal}/>)
         : null}
 
+      <Search />
       <UserList users={users}/>
     </main>
   )

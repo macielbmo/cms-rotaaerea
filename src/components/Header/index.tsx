@@ -77,7 +77,7 @@ export function Header (): JSX.Element {
             </div>
           </Dropdown>
 
-        )
+          )
         : null}
 
       {admin
@@ -95,7 +95,7 @@ export function Header (): JSX.Element {
             </div>
           </Dropdown>
 
-        )
+          )
         : null}
     </Container>
   )
