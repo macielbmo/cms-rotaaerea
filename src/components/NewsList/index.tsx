@@ -13,16 +13,17 @@ interface UserListProps {
   }]
 }
 
-export function UserList ({ users }: UserListProps): JSX.Element {
+export function NewsList ({ users }: UserListProps): JSX.Element {
   return (
     <Container>
       <table>
         <thead>
           <tr className='row'>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>CPF</th>
-            <th>Tipo</th>
+            <th>Titulo</th>
+            <th>Vizualizações</th>
+            <th>Redator</th>
+            <th>Categoria</th>
+            <th>Data</th>
             <th>Status</th>
             <th></th>
           </tr>
@@ -31,13 +32,12 @@ export function UserList ({ users }: UserListProps): JSX.Element {
         {users.map((user) => (
           <tbody key={user.id}>
             <tr className='row'>
-              <td className='name-user'>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.cpf} 155.699.996-80</td>
-              <td>{user.type} Administrador</td>
-              <th>
-                <ActiveStatus />
-              </th>
+              <td className='name-user'>Novos aviões da frota da Azul 2024</td>
+              <td>1200</td>
+              <td>Maciel Martins</td>
+              <td>Companhias Aérea</td>
+              <td>29/12/2029</td>
+              <td><ActiveStatus /> </td>
               <td className='options'><Options/></td>
             </tr>
           </tbody>

@@ -6,7 +6,7 @@ export const Container = styled.header`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #3366FF;
+    background-color: ${({ theme }) => theme.colors.primary.main};
 
     .box-header {
         display: flex;
