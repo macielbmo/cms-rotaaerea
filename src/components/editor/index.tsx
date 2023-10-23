@@ -1,5 +1,3 @@
-import { type FormEvent, useState } from 'react'
-
 import { Container } from './styles'
 
 import ReactQuill, { Quill } from 'react-quill'
@@ -8,9 +6,12 @@ import 'react-quill/dist/quill.snow.css'
 import ImageRiseze from 'quill-image-resize-module-react'
 Quill.register('modules/imageResize', ImageRiseze)
 
-export default function Editor (): JSX.Element {
-  const [editorContent, setEditorContent] = useState('')
+interface EditorProps {
+  editorContent: string
+  haddleEditorContent: () => {}
+}
 
+export default function Editor (props: EditorProps): JSX.Element {
   const modules = {
     toolbar: [
       [{ size: ['small', false, 'large', 'huge'] }],
@@ -33,16 +34,11 @@ export default function Editor (): JSX.Element {
     }
   }
 
-  function salvar (e: FormEvent): void {
-    e.preventDefault()
-    console.log(editorContent)
-  }
-
   return (
     <Container>
       <ReactQuill
-        value={editorContent}
-        onChange={(value) => { setEditorContent(value) }}
+        value={props.editorContent}
+        onChange={(value) => { props.haddleEditorContent(value) }}
         modules={modules}
         placeholder='Digite aqui o texto da sua nóticia'
         className='editor'

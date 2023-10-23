@@ -1,8 +1,14 @@
 import { useState } from 'react'
-
 import { Container } from './styles'
 
-export default function FeaturedImage (): JSX.Element {
+interface FeaturedImageProps {
+  image: string
+  descriptionImg: string
+  haddleImage: () => {}
+  haddleDescriptionImg: () => {}
+}
+
+export default function FeaturedImage (props: FeaturedImageProps): JSX.Element {
   const [imageUrl, setImateUrl] = useState('')
 
   const uploadImage = async (e: any): Promise<void> => {
@@ -20,22 +26,22 @@ export default function FeaturedImage (): JSX.Element {
           body: formData
         })
         const { data } = await response.json()
-        setImateUrl(data.url)
+        props.haddleImage(data.url)
       } catch (error) {
         console.log('Error ao fazer o upload da imagem: ', error)
       }
     }
 
-    console.log(imageUrl)
+    console.log(image)
   }
 
   return (
     <Container>
       <h2>Imagem destacada</h2>
 
-      {imageUrl !== ''
+      {props.image !== ''
         ? (
-          <img src={imageUrl} alt="image" />
+          <img src={props.image} alt="image" />
           )
         : (
           <div className='no-image'>
@@ -47,7 +53,11 @@ export default function FeaturedImage (): JSX.Element {
 
       <div className='description'>
         <label htmlFor="description">Descrição ou fonte da imagem</label>
-        <input type="text" placeholder='Descrição (opcional)' />
+        <input
+          type="text"
+          placeholder='Descrição (opcional)'
+          value={props.descriptionImg}
+          onChange={(e) => props.haddleDescriptionImg(e.target.value)} />
       </div>
     </Container>
   )

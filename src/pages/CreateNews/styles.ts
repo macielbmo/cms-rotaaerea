@@ -59,4 +59,25 @@ export const Container = styled.div`
         color: ${({ theme }) => theme.colors.primary.dark};
         margin-bottom: 10px;
     }
+
+    .button-publish {
+        width: 100%;
+        height: 45px;
+        border: none;
+
+        margin-top: 15px;
+
+        background-color: #3366FF;
+        color: #fff;
+
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+
+        transition: all .3s;
+    }
+
+    .button-publish:hover {
+        background-color: #3337FF;
+    }
 `
