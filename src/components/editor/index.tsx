@@ -8,7 +8,7 @@ Quill.register('modules/imageResize', ImageRiseze)
 
 interface EditorProps {
   editorContent: string
-  haddleEditorContent: () => {}
+  handleContent: () => void
 }
 
 export default function Editor (props: EditorProps): JSX.Element {
@@ -38,7 +38,7 @@ export default function Editor (props: EditorProps): JSX.Element {
     <Container>
       <ReactQuill
         value={props.editorContent}
-        onChange={(value) => { props.haddleEditorContent(value) }}
+        onChange={props.handleContent}
         modules={modules}
         placeholder='Digite aqui o texto da sua nóticia'
         className='editor'

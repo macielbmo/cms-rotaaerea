@@ -24,6 +24,10 @@ export const Container = styled.div`
         margin-bottom: 5px;
     }
 
+    .image {
+        width: 100%;
+    }
+
     .description {
         width: 100%;
         margin-top: 15px;

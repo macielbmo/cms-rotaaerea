@@ -5,66 +5,69 @@ import { Container } from './styles'
 
 import Editor from '../../components/editor'
 import FeaturedImage from '../../components/featuredImage'
+import InputText from '../../components/inputs/inputText'
 
 export default function CreateNews (): JSX.Element {
-  const [manchete, setManchete] = useState('')
-  const [titleNews, setTitleNews] = useState('')
-  const [subtitle, setSubtitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [fonteTitle, setFonteTitle] = useState('')
-  const [urlFonte, setUrlFonte] = useState('')
+  const [newsData, setNewsData] = useState({
+    title: '',
+    subtitle: '',
+    content: '',
+    author: '',
+    sourceNews: '',
+    urlSource: '',
+    urlImg: '',
+    descriptionImg: '',
+    category: '',
+    tags: [''],
+    toSchedule: ''
+  })
 
-  const [editorContent, setEditorContent] = useState('')
-  const [image, setImage] = useState('')
-  const [descriptionImg, setDescriptionImg] = useState('')
+  const [categories, setCategories] = useState()
+
+  function handleContent (value: any): void {
+    const name = 'content'
+
+    setNewsData(prevNewsData => ({
+      ...prevNewsData,
+      [name]: value
+    }))
+  }
+
+  function handleImg (url: any): void {
+    const name = 'urlImg'
+
+    setNewsData(prevNewsData => ({
+      ...prevNewsData,
+      [name]: url
+    }))
+  }
+
+  function handleCategory (e: any): void {
+    const name = 'category'
+    console.log(e)
+
+    setNewsData(prevNewsData => ({
+      ...prevNewsData,
+      [name]: e
+    }))
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+
+    setNewsData(prevNewsData => ({
+      ...prevNewsData,
+      [name]: value
+    }))
+
+    console.log(newsData)
+  }
 
   const [publish, setPublish] = useState(false)
 
-  function handlePublish (e: FormEvent) {
+  function handlePublish (e: FormEvent): void {
     e.preventDefault()
     setPublish(!publish)
-  }
-
-  function haddleManchete (value: any): void {
-    setManchete(value)
-  }
-  function haddleTitleNews (value: any): void {
-    setTitleNews(value)
-  }
-  function haddleSubtitle (value: any): void {
-    setSubtitle(value)
-  }
-  function haddleAuthor (value: any): void {
-    setAuthor(value)
-  }
-  function haddleFonteTitle (value: any): void {
-    setFonteTitle(value)
-  }
-  function haddleUrlFonte (value: any): void {
-    setUrlFonte(value)
-  }
-
-  function haddleEditorContent (value: any): void {
-    setEditorContent(value)
-  }
-
-  function haddleImage (value: any): void {
-    setImage(value)
-  }
-  function haddleDescriptionImg (value: any): void {
-    setDescriptionImg(value)
-  }
-
-  const newsData = {
-    editorContent,
-    manchete,
-    titleNews,
-    subtitle,
-    author,
-    fonteTitle,
-    urlFonte,
-    image,
-    descriptionImg
   }
 
   const registerNews = async () => {
@@ -97,6 +100,18 @@ export default function CreateNews (): JSX.Element {
     }
   }, [publish])
 
+  useEffect(() => {
+    fetch('http://localhost:3001/categories')
+      .then(async (response) => {
+        const json = await response.json()
+
+        setCategories(json)
+      })
+      .catch((error) => {
+        console.log('erro', error)
+      })
+  }, [])
+
   return (
     <Main>
       <Container>
@@ -107,68 +122,62 @@ export default function CreateNews (): JSX.Element {
         <form>
           <div className='form-news'>
             <div className='input'>
-              <label htmlFor="headline">Manchete da Notícia</label>
-              <input
-                type="text"
-                id='headline'
-                placeholder='Resumo curto (max 30 caracteres)'
-                value={manchete}
-                onChange={(e) => { haddleManchete(e.target.value) }}/>
-            </div>
+              <InputText
+                label='Título da notícia'
+                type='text'
+                id='title-news'
+                name='title'
+                placeholder='Digite o título'
+                value={newsData.title}
+                onChange={handleInputChange}
+              />
 
-            <div className='input'>
-              <label htmlFor="title">Título da Notícia</label>
-              <input
-                type="text"
-                id='title'
-                placeholder='Difite o titulo'
-                value={titleNews}
-                onChange={(e) => { haddleTitleNews(e.target.value) }}/>
-            </div>
-
-            <div className='input'>
-              <label htmlFor="sub-title">Subtítulo</label>
-              <input
-                type="text"
+              <InputText
+                label='Subtítulo'
+                type='text'
                 id='sub-title'
-                placeholder='Difite o subtitulo'
-                value={subtitle}
-                onChange={(e) => { haddleSubtitle(e.target.value) }}/>
-            </div>
+                name='subtitle'
+                placeholder='Digite o subtítulo'
+                value={newsData.subtitle}
+                onChange={handleInputChange}
+              />
 
-            <div className='input'>
-              <label htmlFor="content">Conteúdo</label>
-              <Editor editorContent={editorContent} haddleEditorContent={haddleEditorContent} />
-            </div>
+              <div className='input'>
+                <label htmlFor="content">Conteúdo</label>
+                <Editor
+                  editorContent={newsData.content}
+                  handleContent={handleContent} />
+              </div>
 
-            <div className='input'>
-              <label htmlFor="sub-title">Exibir nome do Autor como:</label>
-              <input
-                type="text"
-                id='sub-title'
+              <InputText
+                label='Exibir nome do Autor como:'
+                type='text'
+                id='author'
+                name='author'
                 placeholder='Nome do autor'
-                value={author}
-                onChange={(e) => { haddleAuthor(e.target.value) }}/>
-            </div>
+                value={newsData.author}
+                onChange={handleInputChange}
+              />
 
-            <div className='input'>
-              <label htmlFor="sub-title">Fonte da Notícia</label>
-              <input
-                type="text"
-                id='sub-title'
-                placeholder='Nome da fonte'
-                value={fonteTitle}
-                onChange={(e) => { haddleFonteTitle(e.target.value) }}/>
-            </div>
+              <InputText
+                label='Fonte da Notícia'
+                type='text'
+                id='sourse'
+                name='sourceNews'
+                placeholder='Digite o nome da fonte'
+                value={newsData.sourceNews}
+                onChange={handleInputChange}
+              />
 
-            <div className='input'>
-              <label htmlFor="sub-title">URL da fonte da notícia:</label>
-              <input
-                type="text"
-                id='sub-title'
-                placeholder='Insira a URL'
-                value={urlFonte}
-                onChange={(e) => { haddleUrlFonte(e.target.value) }}/>
+              <InputText
+                label='URL da fonte da notícia:'
+                type='text'
+                id='urlSource'
+                name='urlSource'
+                placeholder='Digite a URL da fonte'
+                value={newsData.urlSource}
+                onChange={handleInputChange}
+              />
             </div>
           </div>
 
@@ -176,10 +185,36 @@ export default function CreateNews (): JSX.Element {
             <h1>Publicar Post</h1>
 
             <FeaturedImage
-              descriptionImg={descriptionImg}
-              image={image}
-              haddleDescriptionImg={haddleDescriptionImg}
-              haddleImage={haddleImage}/>
+              urlImage={newsData.urlImg}
+              descriptionImg={newsData.descriptionImg}
+              handleInputChange={handleInputChange}
+              handleImg={handleImg}
+            />
+
+            <div className='category-select'>
+              <h1>Escolha a categoria</h1>
+
+              <div className='select-category'>
+                {categories
+                  ? (
+                      categories.map((category) => (
+                      <label htmlFor={category.name}>
+
+                        <input
+                          type="radio"
+                          name="category"
+                          value={category.name}
+                          id={category.name}
+                          checked={newsData.category === category.name}
+                          onChange={(e) => { handleCategory(e.target.value) }} />
+
+                        {category.name}
+                      </label>
+                      ))
+                    )
+                  : null}
+              </div>
+            </div>
 
             <button className='button-publish' onClick={handlePublish}>Publicar Post</button>
           </div>

@@ -55,7 +55,7 @@ export const Container = styled.div`
     }
 
     .form-sider h1 {
-        font-size: 24px;
+        font-size: 20px;
         color: ${({ theme }) => theme.colors.primary.dark};
         margin-bottom: 10px;
     }
@@ -79,5 +79,11 @@ export const Container = styled.div`
 
     .button-publish:hover {
         background-color: #3337FF;
+    }
+
+    .select-category {
+      display: flex;
+      flex-direction: column;
+      gap: 15px
     }
 `

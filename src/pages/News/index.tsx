@@ -14,7 +14,7 @@ export function News (): JSX.Element {
   }
 
   useEffect(() => {
-    fetch('http://localhost:3001/users')
+    fetch('http://localhost:3001/news')
       .then(async (response) => {
         const json = await response.json()
 
@@ -33,11 +33,6 @@ export function News (): JSX.Element {
 
           <Link to={'/noticias/criar-noticia'} className='btn-NewNews'>Nova notícia</Link>
         </div>
-
-        {modal
-          ? (
-            <UserRegistration setModal={toggleModal}/>)
-          : null}
 
         <div className='box-search'>
           <input className='input search' type="search" placeholder='Pesquisar...'/>
