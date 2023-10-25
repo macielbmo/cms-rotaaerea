@@ -1,18 +1,17 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    border: 1px solid ${({ theme }) => theme.colors.gray.lighter};
-    padding: 10px 15px;
+    margin: 7px 0;
 
     h2 {
         font-size: 18px;
-        color: ${({ theme }) => theme.colors.gray.main};
+        font-weight: 400;
         margin-bottom: 10px;
     }
 
     .no-image {
         background-color: ${({ theme }) => theme.colors.gray.main};
-        width: 75%;
+        width: 30%;
         height: 200px;
 
         display: flex;
@@ -24,12 +23,29 @@ export const Container = styled.div`
         margin-bottom: 5px;
     }
 
+    .box-image {
+      width: 30%;
+      aspect-ratio: 16 / 9;
+
+      position: relative;
+      overflow: hidden;
+    }
+
     .image {
-        width: 100%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .input-upload-image {
+      margin-top: 10px;
     }
 
     .description {
-        width: 100%;
+        width: 60%;
         margin-top: 15px;
 
         font-size: 16px;

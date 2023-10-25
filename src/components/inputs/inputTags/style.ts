@@ -9,10 +9,12 @@ export const Container = styled.div`
     font-size: 18px;
   }
 
-  input {
-    height: 35px;
-    padding: 4px 8px;
-    border: 2px solid ${({ theme }) => theme.colors.gray.light};
-    border-radius: 5px;
+  .react-tagsinput-tag {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    margin: 2px;
+    padding: 2px 8px;
+    border-radius: 4px;
   }
 `

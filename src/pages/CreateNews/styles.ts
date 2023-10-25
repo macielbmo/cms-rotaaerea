@@ -15,6 +15,7 @@ export const Container = styled.div`
 
     form {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
 
         border-radius: 5px;
@@ -27,43 +28,45 @@ export const Container = styled.div`
     }
 
     .form-news {
-        width: 68%;
+        width: 100%;
         display: flex;
+
         flex-direction: column;
         justify-content: flex-start;
         gap: 15px;
-    }
-
-    .input {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        width: 90%;
 
         font-size: 14px;
     }
 
-    .input input {
-        height: 30px;
-        padding: 4px 8px;
-        border: 2px solid ${({ theme }) => theme.colors.gray.light};
-        border-radius: 5px;
+    .input-content label{
+      margin-bottom: 5px;
+      font-size: 18px;
     }
 
-    .form-sider {
-        width: 30%;
+    .input-image label{
+      font-size: 18px;
     }
 
-    .form-sider h1 {
-        font-size: 20px;
-        color: ${({ theme }) => theme.colors.primary.dark};
-        margin-bottom: 10px;
+    .category-select > label{
+      font-size: 18px;
     }
 
+    .select-category {
+      margin-top: 10px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .button-salve,
     .button-publish {
-        width: 100%;
+        width: 40%;
         height: 45px;
         border: none;
+        border-radius: 5px;
 
         margin-top: 15px;
 
@@ -75,6 +78,14 @@ export const Container = styled.div`
         text-transform: uppercase;
 
         transition: all .3s;
+    }
+
+    .button-salve {
+      background-color: #12c75d;
+    }
+
+    .button-salve:hover {
+      background-color: #0e9e4a;
     }
 
     .button-publish:hover {

@@ -6,6 +6,8 @@ import { Container } from './styles'
 import Editor from '../../components/editor'
 import FeaturedImage from '../../components/featuredImage'
 import InputText from '../../components/inputs/inputText'
+import InputTags from '../../components/inputs/inputTags'
+import { BiLogoLess } from 'react-icons/bi'
 
 export default function CreateNews (): JSX.Element {
   const [newsData, setNewsData] = useState({
@@ -19,10 +21,13 @@ export default function CreateNews (): JSX.Element {
     descriptionImg: '',
     category: '',
     tags: [''],
-    toSchedule: ''
+    toSchedule: '',
+    status: ''
   })
 
   const [categories, setCategories] = useState()
+
+  const [publish, setPublish] = useState(false)
 
   function handleContent (value: any): void {
     const name = 'content'
@@ -44,11 +49,19 @@ export default function CreateNews (): JSX.Element {
 
   function handleCategory (e: any): void {
     const name = 'category'
-    console.log(e)
 
     setNewsData(prevNewsData => ({
       ...prevNewsData,
       [name]: e
+    }))
+  }
+
+  function handleTags (tags: any): void {
+    const name = 'tags'
+
+    setNewsData(prevNewsData => ({
+      ...prevNewsData,
+      [name]: tags
     }))
   }
 
@@ -59,14 +72,29 @@ export default function CreateNews (): JSX.Element {
       ...prevNewsData,
       [name]: value
     }))
-
-    console.log(newsData)
   }
-
-  const [publish, setPublish] = useState(false)
 
   function handlePublish (e: FormEvent): void {
     e.preventDefault()
+    const name = 'status'
+
+    setNewsData(prevNewsData => ({
+      ...prevNewsData,
+      [name]: 'true'
+    }))
+
+    setPublish(!publish)
+  }
+
+  function handleSalve (e: FormEvent): void {
+    e.preventDefault()
+    const name = 'status'
+
+    setNewsData(prevNewsData => ({
+      ...prevNewsData,
+      [name]: 'false'
+    }))
+
     setPublish(!publish)
   }
 
@@ -92,6 +120,8 @@ export default function CreateNews (): JSX.Element {
     } catch (error) {
       console.log('Erro ao publicar noticia:', error)
     }
+
+    console.log(newsData)
   }
 
   useEffect(() => {
@@ -121,84 +151,91 @@ export default function CreateNews (): JSX.Element {
 
         <form>
           <div className='form-news'>
-            <div className='input'>
-              <InputText
-                label='Título da notícia'
-                type='text'
-                id='title-news'
-                name='title'
-                placeholder='Digite o título'
-                value={newsData.title}
-                onChange={handleInputChange}
+            <InputText
+              label='Título da notícia'
+              type='text'
+              id='title-news'
+              name='title'
+              placeholder='Digite o título'
+              value={newsData.title}
+              onChange={handleInputChange}
+            />
+
+            <InputText
+              label='Subtítulo'
+              type='text'
+              id='sub-title'
+              name='subtitle'
+              placeholder='Digite o subtítulo'
+              value={newsData.subtitle}
+              onChange={handleInputChange}
+            />
+
+            <div className='input-content'>
+              <label htmlFor="content">Conteúdo</label>
+              <Editor
+                editorContent={newsData.content}
+                handleContent={handleContent} />
+            </div>
+
+            <InputText
+              label='Nome do autor'
+              type='text'
+              id='author'
+              name='author'
+              placeholder='Nome do autor'
+              value={newsData.author}
+              onChange={handleInputChange}
+            />
+
+            <InputText
+              label='Nome da fonte da notícia'
+              type='text'
+              id='sourse'
+              name='sourceNews'
+              placeholder='Digite o nome da fonte'
+              value={newsData.sourceNews}
+              onChange={handleInputChange}
+            />
+
+            <InputText
+              label='URL da fonte da notícia'
+              type='text'
+              id='urlSource'
+              name='urlSource'
+              placeholder='Digite a URL da fonte'
+              value={newsData.urlSource}
+              onChange={handleInputChange}
+            />
+
+            <div className='input-image'>
+              <label>Imagem de destaque</label>
+              <FeaturedImage
+                urlImage={newsData.urlImg}
+                descriptionImg={newsData.descriptionImg}
+                handleInputChange={handleInputChange}
+                handleImg={handleImg}
               />
 
               <InputText
-                label='Subtítulo'
+                label='Fonte da imagem'
                 type='text'
-                id='sub-title'
-                name='subtitle'
-                placeholder='Digite o subtítulo'
-                value={newsData.subtitle}
-                onChange={handleInputChange}
-              />
-
-              <div className='input'>
-                <label htmlFor="content">Conteúdo</label>
-                <Editor
-                  editorContent={newsData.content}
-                  handleContent={handleContent} />
-              </div>
-
-              <InputText
-                label='Exibir nome do Autor como:'
-                type='text'
-                id='author'
-                name='author'
-                placeholder='Nome do autor'
-                value={newsData.author}
-                onChange={handleInputChange}
-              />
-
-              <InputText
-                label='Fonte da Notícia'
-                type='text'
-                id='sourse'
-                name='sourceNews'
-                placeholder='Digite o nome da fonte'
-                value={newsData.sourceNews}
-                onChange={handleInputChange}
-              />
-
-              <InputText
-                label='URL da fonte da notícia:'
-                type='text'
-                id='urlSource'
-                name='urlSource'
-                placeholder='Digite a URL da fonte'
-                value={newsData.urlSource}
+                id='descriptionImg'
+                name='descriptionImg'
+                placeholder='Digite a fonte da imagem'
+                value={newsData.descriptionImg}
                 onChange={handleInputChange}
               />
             </div>
-          </div>
-
-          <div className='form-sider'>
-            <h1>Publicar Post</h1>
-
-            <FeaturedImage
-              urlImage={newsData.urlImg}
-              descriptionImg={newsData.descriptionImg}
-              handleInputChange={handleInputChange}
-              handleImg={handleImg}
-            />
 
             <div className='category-select'>
-              <h1>Escolha a categoria</h1>
+              <label>Escolha uma categoria</label>
 
               <div className='select-category'>
                 {categories
                   ? (
-                      categories.map((category) => (
-                      <label htmlFor={category.name}>
+                    categories.map((category) => (
+                      <label key={category.id} htmlFor={category.name}>
 
                         <input
                           type="radio"
@@ -210,13 +247,29 @@ export default function CreateNews (): JSX.Element {
 
                         {category.name}
                       </label>
-                      ))
-                    )
+                    ))
+                  )
                   : null}
               </div>
             </div>
 
-            <button className='button-publish' onClick={handlePublish}>Publicar Post</button>
+            <InputTags
+              handleTags={handleTags}
+            />
+
+            <InputText
+              label='Agendar postagem'
+              type='datetime-local'
+              id='dateTimeInput'
+              name='toSchedule'
+              value={newsData.toSchedule}
+              onChange={handleInputChange}
+            />
+
+            <div className='buttons'>
+              <button className='button-salve' onClick={handleSalve}>Salvar</button>
+              <button className='button-publish' onClick={handlePublish}>Publicar Post</button>
+            </div>
           </div>
         </form>
       </Container>

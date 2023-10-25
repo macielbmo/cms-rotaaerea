@@ -12,7 +12,7 @@ interface InputTextProps {
 
 export default function InputText (props: InputTextProps): JSX.Element {
   return (
-    <>
+    <Container>
       <label htmlFor={props.id}>{props.label}</label>
       <input
         type={props.type}
@@ -22,6 +22,6 @@ export default function InputText (props: InputTextProps): JSX.Element {
         value={props.value}
         onChange={props.onChange}
       />
-    </>
+    </Container>
   )
 }

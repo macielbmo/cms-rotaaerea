@@ -2,9 +2,10 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     width: 100%;
+    margin: 5px 0;
 
     .ql-editor {
-        height: 92vh;
+        height: 85vh;
         overflow: auto;
     }
 

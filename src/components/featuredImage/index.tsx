@@ -36,26 +36,17 @@ export default function FeaturedImage (props: FeaturedImageProps): JSX.Element {
 
   return (
     <Container>
-      <h2>Imagem destacada</h2>
-
       {imageUrl !== ''
         ? (
-          <img className='image' src={imageUrl} alt="image" />)
+          <div className='box-image'>
+            <img className='image' src={imageUrl} alt="image" />
+          </div>)
         : (
           <div className='no-image'>
             <p>Sem imagem</p>
           </div>)}
 
-      <input type="file" accept='image/*' onChange={uploadImage}/>
-
-      <div className='description'>
-        <label htmlFor="description">Descrição ou fonte da imagem</label>
-        <input
-          type="text"
-          placeholder='Descrição (opcional)'
-          value={props.descriptionImg}
-          onChange={props.handleInputChange} />
-      </div>
+      <input className='input-upload-image' type="file" accept='image/*' onChange={uploadImage}/>
     </Container>
   )
 }
