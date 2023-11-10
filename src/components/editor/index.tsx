@@ -1,9 +1,9 @@
-import { Container } from './styles'
-
 import ReactQuill, { Quill } from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-
 import ImageRiseze from 'quill-image-resize-module-react'
+
+import { Container } from './styles'
+
 Quill.register('modules/imageResize', ImageRiseze)
 
 interface EditorProps {
@@ -30,7 +30,6 @@ export default function Editor (props: EditorProps): JSX.Element {
     ],
     imageResize: {
       parchment: Quill.import('parchment')
-      // See optional "config" below
     }
   }
 

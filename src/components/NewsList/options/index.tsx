@@ -2,13 +2,24 @@ import { useState, useEffect, useRef } from 'react'
 
 import { SlOptions } from 'react-icons/sl'
 import { Icon, Menu } from './styles'
+import { DeleteNews } from '../../Modais/deleteNews'
 
-export default function Options (): JSX.Element {
+interface OptionsProps {
+  newsId: string
+}
+
+export default function Options ({ newsId }: OptionsProps): JSX.Element {
+  const [modalDelete, setModalDelete] = useState(false)
   const [options, setOptions] = useState(false)
+
   const menuRef = useRef(null)
 
   function toggleOptions (): void {
     setOptions(!options)
+  }
+
+  function toggleModalDelete (): void {
+    setModalDelete(!modalDelete)
   }
 
   useEffect(() => {
@@ -34,11 +45,17 @@ export default function Options (): JSX.Element {
             <ul>
               <li>Ver detalhes</li>
               <li>Editar</li>
-              <li>Excluir</li>
+              <li onClick={toggleModalDelete}>Excluir</li>
             </ul>
           </div>
         </Menu>
       )}
+
+      {modalDelete
+        ? (
+          <DeleteNews setModal={setModalDelete} newsId={newsId}/>
+        )
+        : null}
     </div>
   )
 }

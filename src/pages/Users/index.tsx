@@ -6,15 +6,15 @@ import { Main } from '../../assets/styles/global'
 import { Container } from './styles'
 
 export function Users (): JSX.Element {
-  const [modal, setModal] = useState(false)
+  const [modalNovoUsuario, setModalNovoUsuario] = useState(false)
   const [users, setUsers] = useState([])
 
-  function toggleModal (): void {
-    setModal(!modal)
+  function toggleModalNovoUsuario (): void {
+    setModalNovoUsuario(!modalNovoUsuario)
   }
 
   useEffect(() => {
-    fetch('http://localhost:3001/users')
+    fetch(`${process.env.DATABASE_URL}/users`)
       .then(async (response) => {
         const json = await response.json()
 
@@ -31,12 +31,12 @@ export function Users (): JSX.Element {
         <div className='header'>
           <h1>Lista de usuários</h1>
 
-          <button onClick={toggleModal}>Novo Usuário</button>
+          <button onClick={toggleModalNovoUsuario}>Novo Usuário</button>
         </div>
 
-        {modal
+        {modalNovoUsuario
           ? (
-            <UserRegistration setModal={toggleModal}/>)
+            <UserRegistration setModal={toggleModalNovoUsuario}/>)
           : null}
 
         <div className='box-search'>

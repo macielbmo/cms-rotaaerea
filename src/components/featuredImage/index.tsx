@@ -6,6 +6,7 @@ interface FeaturedImageProps {
   descriptionImg: string
   handleInputChange: () => void
   handleImg: (url: string) => void
+  required: boolean
 }
 
 export default function FeaturedImage (props: FeaturedImageProps): JSX.Element {
@@ -15,19 +16,24 @@ export default function FeaturedImage (props: FeaturedImageProps): JSX.Element {
     const file = e.target.files[0]
 
     if (file instanceof File) {
+      const formData = new FormData()
+      formData.append('file', file)
+
       try {
-        const apiKey = '6b3e22d5ff291f94ce483ebca2f2b1d8'
-        const formData = new FormData()
-        formData.append('image', file)
+        const url = `${process.env.DATABASE_URL}/image`
 
-        const response = await fetch('https://api.imgbb.com/1/upload?key=' + apiKey, {
-
+        const response = await fetch(url, {
           method: 'POST',
           body: formData
         })
-        const { data } = await response.json()
-        props.handleImg(data.url)
-        setImateUrl(data.url)
+
+        if (response.ok) {
+          const data = await response.json()
+          const img = data.url
+          console.log(data)
+          props.handleImg(img)
+          setImateUrl(img)
+        }
       } catch (error) {
         console.log('Error ao fazer o upload da imagem: ', error)
       }
@@ -46,7 +52,7 @@ export default function FeaturedImage (props: FeaturedImageProps): JSX.Element {
             <p>Sem imagem</p>
           </div>)}
 
-      <input className='input-upload-image' type="file" accept='image/*' onChange={uploadImage}/>
+      <input className='input-upload-image' type="file" accept='image/*' onChange={uploadImage} required= {props.required}/>
     </Container>
   )
 }

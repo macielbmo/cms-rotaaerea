@@ -6,23 +6,21 @@ import { Main } from '../../assets/styles/global'
 import { Container } from './styles'
 
 export function News (): JSX.Element {
-  const [modal, setModal] = useState(false)
-  const [users, setUsers] = useState([])
-
-  function toggleModal (): void {
-    setModal(!modal)
-  }
+  const [news, setNews] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3001/news')
+    fetch(`${process.env.DATABASE_URL}/news`, {
+      method: 'GET'
+    })
       .then(async (response) => {
         const json = await response.json()
-
-        setUsers(json)
+        setNews(json)
       })
       .catch((error) => {
         console.log('erro', error)
       })
+
+    console.log(news)
   }, [])
 
   return (
@@ -53,7 +51,7 @@ export function News (): JSX.Element {
           </div>
         </div>
 
-        <NewsList users={users}/>
+        <NewsList news={news}/>
       </Container>
     </Main>
   )

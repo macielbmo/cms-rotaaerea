@@ -4,41 +4,50 @@ import ActiveStatus from './status/active'
 import DisabledStatus from './status/disabled'
 
 interface UserListProps {
-  users: [{
+  news: [{
     id: number
-    name: string
-    email: string
-    cpf: string
-    type: string
+    title: string
+    author: string
+    category: string
+    category_user_name: string
+    created_at: string
   }]
 }
 
-export function NewsList ({ users }: UserListProps): JSX.Element {
+export function NewsList ({ news }: UserListProps): JSX.Element {
+  console.log(news)
+
+  const options = {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  }
+
   return (
     <Container>
       <table>
         <thead>
           <tr className='row'>
             <th>Titulo</th>
-            <th>Vizualizações</th>
-            <th>Redator</th>
             <th>Categoria</th>
+            <th>Redator</th>
             <th>Data</th>
             <th>Status</th>
             <th></th>
           </tr>
         </thead>
 
-        {users.map((user) => (
-          <tbody key={user.id}>
+        {news.map((item) => (
+          <tbody key={item.id}>
             <tr className='row'>
-              <td className='name-user'>Novos aviões da frota da Azul 2024</td>
-              <td>1200</td>
-              <td>Maciel Martins</td>
-              <td>Companhias Aérea</td>
-              <td>29/12/2029</td>
+              <td className='title'>{item.title}</td>
+              <td>{item.category_user_name}</td>
+              <td>{item.author}</td>
+              <td>{new Intl.DateTimeFormat('pt-BR', options).format(new Date(item.created_at))}</td>
               <td><ActiveStatus /> </td>
-              <td className='options'><Options/></td>
+              <td className='options'><Options key={item.id} newsId={item.id}/></td>
             </tr>
           </tbody>
         ))}

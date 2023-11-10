@@ -9,17 +9,16 @@ import imgAttention from '../../../assets/img/img-modal/attention.png'
 
 interface ModalProps {
   setModal: () => void
-  userId: string
+  newsId: string
 }
 
-export default function UserDelete (props: ModalProps): JSX.Element {
+export function DeleteNews (props: ModalProps): JSX.Element {
   const [loading, setLoading] = useState(false)
-
   const [mensageConfirm, setMensageConfirm] = useState(false)
   const [mensageError, setMesageError] = useState(false)
 
   function handleDeleteUser (): promises {
-    reqDeleteUser(props.idUser)
+    reqDeleteUser(props.newsId)
       .catch((error) => {
         console.log('Erro ao excluir usuário: ', error)
       })
@@ -31,7 +30,7 @@ export default function UserDelete (props: ModalProps): JSX.Element {
     try {
       await new Promise(resolve => setTimeout(resolve, 1000))
 
-      const response = await fetch(`${process.env.DATABASE_URL}/users/${props.userId}`, {
+      const response = await fetch(`${process.env.DATABASE_URL}/news/${props.newsId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -42,13 +41,13 @@ export default function UserDelete (props: ModalProps): JSX.Element {
 
       if (!response.ok) {
         setMesageError(true)
-        throw new Error(`Erro ao excluir o usuário. Código: ${response.status}`)
+        throw new Error(`Erro ao excluir noticia. Código: ${response.status}`)
       }
 
       setMensageConfirm(true)
-      console.log('Item excluído com sucesso.')
+      console.log('Noticia excluído com sucesso.')
     } catch (error) {
-      console.error('Erro ao excluir o usuário: ', error.message)
+      console.error('Erro ao excluir o noticia: ', error.message)
     }
   }
 
@@ -67,33 +66,33 @@ export default function UserDelete (props: ModalProps): JSX.Element {
               <h1>Aguarde</h1>
               <FaSpinner className='spinner' />
             </div>
-            )
+          )
           : null}
 
         {mensageConfirm
           ? (
             <div className='mensage-modal'>
               <img src={imgConfirm} alt="icon de confirmação" />
-              <h1>Cadastro Excluído!</h1>
+              <h1>Notícia Excluída!</h1>
               <button onClick={handleExitModal} className='btnExit'>Fechar</button>
             </div>
-          )
+            )
           : null}
 
         {mensageError
           ? (
             <div className='mensage-modal'>
               <img src={imgError} alt="icon de confirmação" />
-              <h1>Erro ao excluir cadastro!</h1>
+              <h1>Erro ao excluir notícia!</h1>
               <button onClick={handleExitModal} className='btnExit'>Fechar</button>
             </div>
-          )
+            )
           : null}
 
         {!loading && !mensageConfirm && !mensageError && (
           <>
             <img src={imgAttention} alt="" />
-            <p>Você realmente deseja excluir esse cadastro?</p>
+            <p>Você realmente deseja excluir essa notícias?</p>
             <div className='boxBtn'>
               <button
                 className='btnCancelar'

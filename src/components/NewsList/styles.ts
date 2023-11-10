@@ -35,9 +35,11 @@ export const Container = styled.div`
         color: ${({ theme }) => theme.colors.primary.dark};
     }
 
-    .row .name-user {
+    .row .title {
         font-weight: 700;
         font-size: 14px;
+        max-width: 200px;
+        word-wrap: break-word;
     }
 
     .options {

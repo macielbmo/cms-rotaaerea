@@ -21,6 +21,7 @@ export function UserRegistration ({ setModal }: UserRegistrationProps) {
 
   const handleSend = () => {
     setSendFomr(!sendFomr)
+    window.location.reload()
   }
 
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +51,7 @@ export function UserRegistration ({ setModal }: UserRegistrationProps) {
 
   const registerUser = async () => {
     try {
-      const url = 'http://localhost:3001/users'
+      const url = `${process.env.DATABASE_URL}/users`
 
       const response = await fetch(url, {
         method: 'POST',

@@ -7,6 +7,7 @@ interface InputTextProps {
   name: string
   placeholder: string
   value: string
+  required: boolean
   onChange: () => void
 }
 
@@ -15,12 +16,13 @@ export default function InputText (props: InputTextProps): JSX.Element {
     <Container>
       <label htmlFor={props.id}>{props.label}</label>
       <input
-        type={props.type}
-        id={props.id}
-        name={props.name}
-        placeholder={props.placeholder}
-        value={props.value}
-        onChange={props.onChange}
+        type = {props.type}
+        id = {props.id}
+        name = {props.name}
+        placeholder = {props.placeholder}
+        value = {props.value}
+        onChange = {props.onChange}
+        required = {props.required}
       />
     </Container>
   )

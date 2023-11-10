@@ -40,6 +40,7 @@ export default function CreateNews (): JSX.Element {
 
   function handleImg (url: any): void {
     const name = 'urlImg'
+    console.log(url)
 
     setNewsData(prevNewsData => ({
       ...prevNewsData,
@@ -98,6 +99,23 @@ export default function CreateNews (): JSX.Element {
     setPublish(!publish)
   }
 
+  function handleClearForm (): void {
+    setNewsData(() => ({
+      title: '',
+      subtitle: '',
+      content: '',
+      author: '',
+      sourceNews: '',
+      urlSource: '',
+      urlImg: '',
+      descriptionImg: '',
+      category: '',
+      tags: [''],
+      toSchedule: '',
+      status: ''
+    }))
+  }
+
   const registerNews = async () => {
     try {
       const url = 'http://localhost:3001/news'
@@ -117,6 +135,7 @@ export default function CreateNews (): JSX.Element {
 
       const data = await response.json()
       console.log('Noticia publicada com sucesso:', data)
+      handleClearForm()
     } catch (error) {
       console.log('Erro ao publicar noticia:', error)
     }
@@ -158,6 +177,7 @@ export default function CreateNews (): JSX.Element {
               name='title'
               placeholder='Digite o título'
               value={newsData.title}
+              required={true}
               onChange={handleInputChange}
             />
 
@@ -168,6 +188,7 @@ export default function CreateNews (): JSX.Element {
               name='subtitle'
               placeholder='Digite o subtítulo'
               value={newsData.subtitle}
+              required={false}
               onChange={handleInputChange}
             />
 
@@ -185,6 +206,7 @@ export default function CreateNews (): JSX.Element {
               name='author'
               placeholder='Nome do autor'
               value={newsData.author}
+              required={true}
               onChange={handleInputChange}
             />
 
@@ -215,6 +237,7 @@ export default function CreateNews (): JSX.Element {
                 descriptionImg={newsData.descriptionImg}
                 handleInputChange={handleInputChange}
                 handleImg={handleImg}
+                required={true}
               />
 
               <InputText
@@ -224,6 +247,7 @@ export default function CreateNews (): JSX.Element {
                 name='descriptionImg'
                 placeholder='Digite a fonte da imagem'
                 value={newsData.descriptionImg}
+                required={true}
                 onChange={handleInputChange}
               />
             </div>
@@ -243,6 +267,7 @@ export default function CreateNews (): JSX.Element {
                           value={category.name}
                           id={category.name}
                           checked={newsData.category === category.name}
+                          required
                           onChange={(e) => { handleCategory(e.target.value) }} />
 
                         {category.name}

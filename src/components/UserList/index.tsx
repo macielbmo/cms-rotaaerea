@@ -38,7 +38,7 @@ export function UserList ({ users }: UserListProps): JSX.Element {
               <th>
                 <ActiveStatus />
               </th>
-              <td className='options'><Options/></td>
+              <td className='options'><Options userId={user.id}/></td>
             </tr>
           </tbody>
         ))}
