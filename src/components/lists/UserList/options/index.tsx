@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 
 import { SlOptions } from 'react-icons/sl'
 import { Icon, Menu } from './styles'
-import UserDelete from '../../Modais/userDelete'
+import UserDelete from '../../../Modais/userDelete'
 
 interface OptionsProps {
   userId: string
@@ -54,7 +54,7 @@ export default function Options (props: OptionsProps): JSX.Element {
       {modalDelete
         ? (
           <UserDelete setModal={setModalDelete} userId={props.userId}/>
-          )
+        )
         : null}
     </div>
   )

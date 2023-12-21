@@ -8,7 +8,7 @@ import imgError from '../../../assets/img/img-modal/cancelar.png'
 import imgAttention from '../../../assets/img/img-modal/attention.png'
 
 interface ModalProps {
-  setModal: () => void
+  toggleModal: () => void
   newsId: string
 }
 
@@ -17,20 +17,13 @@ export function DeleteNews (props: ModalProps): JSX.Element {
   const [mensageConfirm, setMensageConfirm] = useState(false)
   const [mensageError, setMesageError] = useState(false)
 
-  function handleDeleteUser (): promises {
-    reqDeleteUser(props.newsId)
-      .catch((error) => {
-        console.log('Erro ao excluir usuário: ', error)
-      })
-  }
-
-  async function reqDeleteUser (userId: string): Response {
+  async function reqDeleteUser (id: string): Promise<void> {
     setLoading(true)
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000))
 
-      const response = await fetch(`${process.env.DATABASE_URL}/news/${props.newsId}`, {
+      const response = await fetch(`${process.env.DATABASE_URL}/news/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -47,12 +40,12 @@ export function DeleteNews (props: ModalProps): JSX.Element {
       setMensageConfirm(true)
       console.log('Noticia excluído com sucesso.')
     } catch (error) {
-      console.error('Erro ao excluir o noticia: ', error.message)
+      console.error('Erro ao excluir o noticia: ', (error as Error).message)
     }
   }
 
   function handleExitModal (): void {
-    props.setModal()
+    props.toggleModal()
     window.location.reload()
   }
 
@@ -76,7 +69,7 @@ export function DeleteNews (props: ModalProps): JSX.Element {
               <h1>Notícia Excluída!</h1>
               <button onClick={handleExitModal} className='btnExit'>Fechar</button>
             </div>
-            )
+          )
           : null}
 
         {mensageError
@@ -86,7 +79,7 @@ export function DeleteNews (props: ModalProps): JSX.Element {
               <h1>Erro ao excluir notícia!</h1>
               <button onClick={handleExitModal} className='btnExit'>Fechar</button>
             </div>
-            )
+          )
           : null}
 
         {!loading && !mensageConfirm && !mensageError && (
@@ -97,12 +90,12 @@ export function DeleteNews (props: ModalProps): JSX.Element {
               <button
                 className='btnCancelar'
                 type="submit"
-                onClick={() => { props.setModal() }}
+                onClick={() => { props.toggleModal() }}
               >Não excluir</button>
               <button
                 className='btnCadastrar'
                 type="submit"
-                onClick={() => { handleDeleteUser() }}
+                onClick={() => { void reqDeleteUser(props.newsId) }}
               >Sim, Excluir</button>
             </div>
           </>

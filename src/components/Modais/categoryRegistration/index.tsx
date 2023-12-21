@@ -14,6 +14,7 @@ export function CategoryRegistration ({ setModal }: CategoryRegistrationProps): 
 
   const handleSend = (): void => {
     setSendFomr(!sendFomr)
+    window.location.reload()
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {

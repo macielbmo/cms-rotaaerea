@@ -1,16 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Container } from './styles'
 
 interface FeaturedImageProps {
   urlImg: string
   descriptionImg: string
-  handleInputChange: () => void
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleImg: (url: string) => void
   required: boolean
 }
 
 export default function FeaturedImage (props: FeaturedImageProps): JSX.Element {
-  const [imageUrl, setImateUrl] = useState('')
+  const [imageUrl, setImgeUrl] = useState('')
 
   const uploadImage = async (e: any): Promise<void> => {
     const file = e.target.files[0]
@@ -32,13 +32,23 @@ export default function FeaturedImage (props: FeaturedImageProps): JSX.Element {
           const img = data.url
           console.log(data)
           props.handleImg(img)
-          setImateUrl(img)
+          setImgeUrl(img)
         }
       } catch (error) {
         console.log('Error ao fazer o upload da imagem: ', error)
       }
     }
   }
+
+  console.log('props.urlImg:', props.urlImg)
+
+  useEffect(() => {
+    if (props.urlImg !== undefined) {
+      setImgeUrl(props.urlImg)
+      console.log('props.urlImg:', props.urlImg)
+    }
+    console.log('props.urlImg:', props.urlImg)
+  }, [props.urlImg])
 
   return (
     <Container>

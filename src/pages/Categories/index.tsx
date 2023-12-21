@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 import { Main } from '../../assets/styles/global'
 import { Container } from './styles'
-import { CategoryList } from '../../components/CategoryList'
+import { CategoryList } from '../../components/lists/CategoryList'
 import { CategoryRegistration } from '../../components/Modais/categoryRegistration'
 
 export function Categories (): JSX.Element {

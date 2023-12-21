@@ -17,7 +17,7 @@
         "eslint-plugin-react"
     ],
     "rules": {
-        "react/jsx-filename-extensions": [1 , { "extensions": ["js", "jsx", ".ts", ".tsx"] }],
+        "react/jsx-filename-extensions": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
         "indent": ["error", 2]
     }
 }

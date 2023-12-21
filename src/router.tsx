@@ -8,6 +8,7 @@ import { Admin } from './pages/Admin'
 import { Categories } from './pages/Categories'
 import { News } from './pages/News'
 import CreateNews from './pages/CreateNews'
+import EditNews from './pages/EditNews'
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: '/noticias/criar-noticia',
         element: <CreateNews />
+      },
+      {
+        path: '/noticias/editar/:id',
+        element: <EditNews />
       }
     ]
   }

@@ -1,22 +1,31 @@
 import { Component } from 'react'
 import TagsInput from 'react-tagsinput'
 import 'react-tagsinput/react-tagsinput.css'
+
 import { Container } from './style'
 
-export default class InputTags extends Component {
-  constructor () {
-    super()
+interface InputTagsProps {
+  handleTags: (tags: string[]) => void
+}
+
+interface InputTagsState {
+  tags: string[]
+}
+
+export default class InputTags extends Component<InputTagsProps, InputTagsState> {
+  constructor (props: InputTagsProps) {
+    super(props)
     this.state = {
       tags: []
     }
   }
 
-  handleChange = (tags) => {
+  handleChange = (tags: string[]): void => {
     this.setState({ tags })
     this.props.handleTags(tags)
   }
 
-  render () {
+  render (): JSX.Element {
     return (
       <Container>
         <label>Input de Tags</label>

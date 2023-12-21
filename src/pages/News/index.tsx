@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-import { NewsList } from '../../components/NewsList'
+import { NewsList } from '../../components/lists/NewsList'
 import { Main } from '../../assets/styles/global'
 import { Container } from './styles'
 
 export function News (): JSX.Element {
-  const [news, setNews] = useState([])
+  const [dataNews, setNewsData] = useState([])
 
   useEffect(() => {
     fetch(`${process.env.DATABASE_URL}/news`, {
@@ -14,13 +14,13 @@ export function News (): JSX.Element {
     })
       .then(async (response) => {
         const json = await response.json()
-        setNews(json)
+        setNewsData(json)
       })
       .catch((error) => {
         console.log('erro', error)
       })
 
-    console.log(news)
+    console.log(dataNews)
   }, [])
 
   return (
@@ -51,7 +51,7 @@ export function News (): JSX.Element {
           </div>
         </div>
 
-        <NewsList news={news}/>
+        <NewsList news={dataNews}/>
       </Container>
     </Main>
   )

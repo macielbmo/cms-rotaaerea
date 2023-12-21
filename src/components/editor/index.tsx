@@ -8,7 +8,7 @@ Quill.register('modules/imageResize', ImageRiseze)
 
 interface EditorProps {
   editorContent: string
-  handleContent: () => void
+  handleContent: (value: any) => void
 }
 
 export default function Editor (props: EditorProps): JSX.Element {
@@ -26,12 +26,38 @@ export default function Editor (props: EditorProps): JSX.Element {
 
       ['bold', 'italic', 'underline'],
       ['link', 'image'],
-      ['clean']
+      ['clean'],
+      [{ video: true }]
     ],
     imageResize: {
       parchment: Quill.import('parchment')
     }
   }
+
+  const VideoBlot = Quill.import('formats/video')
+  const Parchment = Quill.import('parchment')
+  const Link = Quill.import('formats/link')
+
+  class VideoWithLink extends VideoBlot {
+    static create (value) {
+      const node = super.create(value)
+      if (value) {
+        const iframe = document.createElement('iframe')
+        iframe.setAttribute('frameborder', '0')
+        iframe.setAttribute('allowfullscreen', true)
+        iframe.setAttribute('src', value)
+        node.appendChild(iframe)
+      }
+      return node
+    }
+
+    static formats () {
+      return true
+    }
+  }
+
+  Quill.register('formats/video', VideoWithLink)
+  Quill.register(Link)
 
   return (
     <Container>

@@ -7,7 +7,7 @@ export const Icon = styled.span`
 
 export const Menu = styled.div`
     position: fixed;
-    right: 4%;
+    margin-left: -85px;
 
     div {
         width: 120px;

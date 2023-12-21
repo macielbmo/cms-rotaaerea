@@ -8,7 +8,7 @@ interface InputTextProps {
   placeholder: string
   value: string
   required: boolean
-  onChange: () => void
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export default function InputText (props: InputTextProps): JSX.Element {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { UserList } from '../../components/UserList'
+import { UserList } from '../../components/lists/UserList'
 
 import { UserRegistration } from '../../components/Modais/userRegistration'
 import { Main } from '../../assets/styles/global'

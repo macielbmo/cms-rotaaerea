@@ -5,6 +5,7 @@ export const Container = styled.div`
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.07);
+    margin-bottom: 64px;
 
     table {
         width: 100%;
@@ -51,5 +52,25 @@ export const Container = styled.div`
     .btn-action {
         cursor: pointer;
         font-size: 18px;
+    }
+
+    .btn-plus-news {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      margin-top: 25px;
+
+      button {
+        padding: 10px 15px;
+        border: none;
+        transition: .5s;
+        border-radius: 14px;
+      }
+
+      button:hover {
+        background: ${({ theme }) => theme.colors.gray.lighter};
+      }
     }
 `
