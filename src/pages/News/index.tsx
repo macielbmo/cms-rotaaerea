@@ -9,7 +9,7 @@ export function News (): JSX.Element {
   const [dataNews, setNewsData] = useState([])
 
   useEffect(() => {
-    fetch(`${process.env.DATABASE_URL}/news`, {
+    fetch('https://rotaaerea-backend.vercel.app/news', {
       method: 'GET'
     })
       .then(async (response) => {

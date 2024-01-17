@@ -23,7 +23,7 @@ export function DeleteNews (props: ModalProps): JSX.Element {
     try {
       await new Promise(resolve => setTimeout(resolve, 1000))
 
-      const response = await fetch(`${process.env.DATABASE_URL}/news/${id}`, {
+      const response = await fetch(`https://rotaaerea-backend.vercel.app/news/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ export function DeleteNews (props: ModalProps): JSX.Element {
               <h1>Aguarde</h1>
               <FaSpinner className='spinner' />
             </div>
-          )
+            )
           : null}
 
         {mensageConfirm
@@ -69,7 +69,7 @@ export function DeleteNews (props: ModalProps): JSX.Element {
               <h1>Notícia Excluída!</h1>
               <button onClick={handleExitModal} className='btnExit'>Fechar</button>
             </div>
-          )
+            )
           : null}
 
         {mensageError
@@ -79,7 +79,7 @@ export function DeleteNews (props: ModalProps): JSX.Element {
               <h1>Erro ao excluir notícia!</h1>
               <button onClick={handleExitModal} className='btnExit'>Fechar</button>
             </div>
-          )
+            )
           : null}
 
         {!loading && !mensageConfirm && !mensageError && (

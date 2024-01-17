@@ -145,12 +145,13 @@ export default function EditNews (): JSX.Element {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const response = await fetch(`${process.env.DATABASE_URL}/news/${id}`)
+        const response = await fetch(`https://rotaaerea-backend.vercel.app/news/${id}`)
         if (!response.ok) {
           throw new Error('Erro ao buscar os dados da notícia')
         }
 
         const news = await response.json()
+        console.log(news)
         handleGetNews(news)
       } catch (error) {
         console.error(error)
@@ -183,7 +184,7 @@ export default function EditNews (): JSX.Element {
       console.log('Erro ao publicar noticia:', error)
     }
 
-    console.log(newsData)
+    // console.log(newsData)
   }
 
   useEffect(() => {
@@ -346,10 +347,10 @@ export default function EditNews (): JSX.Element {
                 </div>
               </div>
             </form>
-          )
+            )
           : (
             <p>Carregando página...</p>
-          )}
+            )}
       </Container>
     </Main>
   )

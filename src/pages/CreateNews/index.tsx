@@ -155,6 +155,7 @@ export default function CreateNews (): JSX.Element {
         const json = await response.json()
 
         setCategories(json)
+        console.log(categories)
       })
       .catch((error) => {
         console.log('erro', error)
@@ -258,7 +259,7 @@ export default function CreateNews (): JSX.Element {
               <div className='select-category'>
                 {categories
                   ? (
-                    categories.map((category) => (
+                      categories.map((category) => (
                       <label key={category.id} htmlFor={category.name}>
 
                         <input
@@ -272,8 +273,8 @@ export default function CreateNews (): JSX.Element {
 
                         {category.name}
                       </label>
-                    ))
-                  )
+                      ))
+                    )
                   : null}
               </div>
             </div>

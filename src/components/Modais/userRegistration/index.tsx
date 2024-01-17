@@ -51,7 +51,7 @@ export function UserRegistration ({ setModal }: UserRegistrationProps) {
 
   const registerUser = async () => {
     try {
-      const url = `${process.env.DATABASE_URL}/users`
+      const url = 'https://rotaaerea-backend.vercel.app/users'
 
       const response = await fetch(url, {
         method: 'POST',

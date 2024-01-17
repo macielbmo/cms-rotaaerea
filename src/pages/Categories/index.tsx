@@ -19,6 +19,7 @@ export function Categories (): JSX.Element {
         const json = await response.json()
 
         setCategories(json)
+        console.log(categories)
       })
       .catch((error) => {
         console.log('erro', error)

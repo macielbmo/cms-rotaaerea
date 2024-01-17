@@ -14,7 +14,7 @@ export function Users (): JSX.Element {
   }
 
   useEffect(() => {
-    fetch(`${process.env.DATABASE_URL}/users`)
+    fetch('https://rotaaerea-backend.vercel.app/users')
       .then(async (response) => {
         const json = await response.json()
 

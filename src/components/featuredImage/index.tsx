@@ -20,7 +20,7 @@ export default function FeaturedImage (props: FeaturedImageProps): JSX.Element {
       formData.append('file', file)
 
       try {
-        const url = `${process.env.DATABASE_URL}/image`
+        const url = 'https://rotaaerea-backend.vercel.app/image'
 
         const response = await fetch(url, {
           method: 'POST',
@@ -40,14 +40,14 @@ export default function FeaturedImage (props: FeaturedImageProps): JSX.Element {
     }
   }
 
-  console.log('props.urlImg:', props.urlImg)
+  // console.log('props.urlImg:', props.urlImg)
 
   useEffect(() => {
     if (props.urlImg !== undefined) {
       setImgeUrl(props.urlImg)
-      console.log('props.urlImg:', props.urlImg)
+      // console.log('props.urlImg:', props.urlImg)
     }
-    console.log('props.urlImg:', props.urlImg)
+    // console.log('props.urlImg:', props.urlImg)
   }, [props.urlImg])
 
   return (

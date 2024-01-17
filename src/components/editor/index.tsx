@@ -42,11 +42,7 @@ export default function Editor (props: EditorProps): JSX.Element {
     static create (value) {
       const node = super.create(value)
       if (value) {
-        const iframe = document.createElement('iframe')
-        iframe.setAttribute('frameborder', '0')
-        iframe.setAttribute('allowfullscreen', true)
-        iframe.setAttribute('src', value)
-        node.appendChild(iframe)
+        node.innerHTML = `<iframe frameborder="0" allowfullscreen="true" src="${value}"></iframe>`
       }
       return node
     }

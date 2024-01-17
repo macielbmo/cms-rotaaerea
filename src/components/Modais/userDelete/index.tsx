@@ -31,7 +31,7 @@ export default function UserDelete (props: ModalProps): JSX.Element {
     try {
       await new Promise(resolve => setTimeout(resolve, 1000))
 
-      const response = await fetch(`${process.env.DATABASE_URL}/users/${props.userId}`, {
+      const response = await fetch(`https://rotaaerea-backend.vercel.app/users/${props.userId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -67,7 +67,7 @@ export default function UserDelete (props: ModalProps): JSX.Element {
               <h1>Aguarde</h1>
               <FaSpinner className='spinner' />
             </div>
-            )
+          )
           : null}
 
         {mensageConfirm
@@ -77,7 +77,7 @@ export default function UserDelete (props: ModalProps): JSX.Element {
               <h1>Cadastro Excluído!</h1>
               <button onClick={handleExitModal} className='btnExit'>Fechar</button>
             </div>
-          )
+            )
           : null}
 
         {mensageError
@@ -87,7 +87,7 @@ export default function UserDelete (props: ModalProps): JSX.Element {
               <h1>Erro ao excluir cadastro!</h1>
               <button onClick={handleExitModal} className='btnExit'>Fechar</button>
             </div>
-          )
+            )
           : null}
 
         {!loading && !mensageConfirm && !mensageError && (
