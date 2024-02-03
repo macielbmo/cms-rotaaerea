@@ -10,10 +10,25 @@ import FeaturedImage from '../../components/featuredImage'
 import InputTags from '../../components/inputs/inputTags'
 
 // Material-UI
-import { FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material'
+import { Alert, AlertTitle, Button, FormControlLabel, FormLabel, Radio, RadioGroup, Stack, TextField } from '@mui/material'
+
+interface newsData {
+  title: string
+  subtitle: string
+  content: string
+  author: string
+  sourceNews: string
+  urlSource: string
+  urlImg: string
+  descriptionImg: string
+  category: string
+  tags: string[]
+  toSchedule: string
+  status: boolean
+}
 
 export default function CreateNews (): JSX.Element {
-  const [newsData, setNewsData] = useState({
+  const [newsData, setNewsData] = useState<newsData>({
     title: '',
     subtitle: '',
     content: '',
@@ -25,16 +40,40 @@ export default function CreateNews (): JSX.Element {
     category: '',
     tags: [''],
     toSchedule: '',
-    status: ''
+    status: true
   })
 
   const [categories, setCategories] = useState()
-
   const [publish, setPublish] = useState(false)
 
-  function handleContent (value: any): void {
-    const name = 'content'
+  // Mensagem de Alerta
+  const [publishSucess, setPublishSucess] = useState(false)
+  const [salveSucess, setSalveSucess] = useState(false)
 
+  function timeAlertPublishSucess () {
+    setPublishSucess(true)
+
+    const timeoutId = setTimeout(() => {
+      setPublishSucess(false)
+      window.location.reload()
+    }, 2500)
+
+    return () => { clearTimeout(timeoutId) }
+  }
+
+  function timeAlertSalveSucess () {
+    setSalveSucess(true)
+
+    const timeoutId = setTimeout(() => {
+      setSalveSucess(false)
+      window.location.reload()
+    }, 2500)
+
+    return () => { clearTimeout(timeoutId) }
+  }
+
+  function handleContent (value: string): void {
+    const name = 'content'
     setNewsData(prevNewsData => ({
       ...prevNewsData,
       [name]: value
@@ -43,8 +82,6 @@ export default function CreateNews (): JSX.Element {
 
   function handleImg (url: any): void {
     const name = 'urlImg'
-    console.log(url)
-
     setNewsData(prevNewsData => ({
       ...prevNewsData,
       [name]: url
@@ -53,7 +90,6 @@ export default function CreateNews (): JSX.Element {
 
   function handleCategory (e: any): void {
     const name = 'category'
-
     setNewsData(prevNewsData => ({
       ...prevNewsData,
       [name]: e
@@ -62,7 +98,6 @@ export default function CreateNews (): JSX.Element {
 
   function handleTags (tags: any): void {
     const name = 'tags'
-
     setNewsData(prevNewsData => ({
       ...prevNewsData,
       [name]: tags
@@ -71,53 +106,44 @@ export default function CreateNews (): JSX.Element {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-
     setNewsData(prevNewsData => ({
       ...prevNewsData,
       [name]: value
     }))
   }
 
-  function handlePublish (e: FormEvent): void {
-    e.preventDefault()
-    const name = 'status'
+  // function handleClearForm (): void {
+  //   setNewsData(() => ({
+  //     title: '',
+  //     subtitle: '',
+  //     content: '',
+  //     author: '',
+  //     sourceNews: '',
+  //     urlSource: '',
+  //     urlImg: '',
+  //     descriptionImg: '',
+  //     category: '',
+  //     tags: [''],
+  //     toSchedule: '',
+  //     status: true
+  //   }))
+  // }
 
-    setNewsData(prevNewsData => ({
-      ...prevNewsData,
-      [name]: 'true'
-    }))
+  // Fetch - Buscar categorias
+  useEffect(() => {
+    const url = process.env.API_URL
 
-    setPublish(!publish)
-  }
+    fetch(`${url}/categories`)
+      .then(async (response) => {
+        const json = await response.json()
 
-  function handleSalve (e: FormEvent): void {
-    e.preventDefault()
-    const name = 'status'
-
-    setNewsData(prevNewsData => ({
-      ...prevNewsData,
-      [name]: 'false'
-    }))
-
-    setPublish(!publish)
-  }
-
-  function handleClearForm (): void {
-    setNewsData(() => ({
-      title: '',
-      subtitle: '',
-      content: '',
-      author: '',
-      sourceNews: '',
-      urlSource: '',
-      urlImg: '',
-      descriptionImg: '',
-      category: '',
-      tags: [''],
-      toSchedule: '',
-      status: ''
-    }))
-  }
+        setCategories(json)
+        console.log(categories)
+      })
+      .catch((error) => {
+        console.log('erro', error)
+      })
+  }, [])
 
   // Fetch - Registra noticia
   const registerNews = async () => {
@@ -138,13 +164,13 @@ export default function CreateNews (): JSX.Element {
       }
 
       const data = await response.json()
-      console.log('Noticia publicada com sucesso:', data)
-      handleClearForm()
+      // console.log('Noticia publicada com sucesso:', data)
+      timeAlertPublishSucess()
+      // handleClearForm()
     } catch (error) {
-      console.log('Erro ao publicar noticia:', error)
+      // console.log('Erro ao publicar noticia:', error)
     }
-
-    console.log(newsData)
+    // console.log(newsData)
   }
 
   useEffect(() => {
@@ -153,21 +179,25 @@ export default function CreateNews (): JSX.Element {
     }
   }, [publish])
 
-  // Fetch - Buscar categorias
-  useEffect(() => {
-    const url = process.env.API_URL
+  function handlePublish (e: FormEvent): void {
+    e.preventDefault()
+    const name = 'status'
+    setNewsData(prevNewsData => ({
+      ...prevNewsData,
+      [name]: true
+    }))
+    setPublish(!publish)
+  }
 
-    fetch(`${url}/categories`)
-      .then(async (response) => {
-        const json = await response.json()
-
-        setCategories(json)
-        console.log(categories)
-      })
-      .catch((error) => {
-        console.log('erro', error)
-      })
-  }, [])
+  function handleSalve (e: FormEvent): void {
+    e.preventDefault()
+    const name = 'status'
+    setNewsData(prevNewsData => ({
+      ...prevNewsData,
+      [name]: false
+    }))
+    setPublish(!publish)
+  }
 
   return (
     <Main>
@@ -265,7 +295,6 @@ export default function CreateNews (): JSX.Element {
                 <label>Imagem de destaque</label>
 
                 <FeaturedImage
-                  urlImage={newsData.urlImg}
                   descriptionImg={newsData.descriptionImg}
                   handleInputChange={handleInputChange}
                   handleImg={handleImg}
@@ -312,20 +341,6 @@ export default function CreateNews (): JSX.Element {
                           ))
                         )
                       : null}
-
-                    {/* <label key={category.id} htmlFor={category.name}>
-
-                      <input
-                        type="radio"
-                        name="category"
-                        value={category.name}
-                        id={category.name}
-                        checked={newsData.category === category.name}
-                        required
-                        onChange={(e) => { handleCategory(e.target.value) }} />
-
-                      {category.name}
-                    </label> */}
                   </RadioGroup>
                 </div>
               </div>
@@ -349,16 +364,31 @@ export default function CreateNews (): JSX.Element {
                 />
               </div>
 
-            </div>
-          </section>
-
-          <section className='section-tow'>
-            <div className='buttons'>
-              <button className='button-salve' onClick={handleSalve}>Salvar</button>
-              <button className='button-publish' onClick={handlePublish}>Publicar Post</button>
+              <div className='buttons'>
+                <Button fullWidth variant='outlined' onClick={handleSalve}>Salvar</Button>
+                <Button fullWidth variant='contained' onClick={handlePublish}>Publicar</Button>
+              </div>
             </div>
           </section>
         </form>
+
+        {publishSucess && (
+          <Stack className='alert' sx={{ width: '100%' }} spacing={2}>
+            <Alert severity='success'>
+              <AlertTitle>Sucesso!</AlertTitle>
+            A notícia foi publicada.
+            </Alert>
+          </Stack>
+        )}
+
+        {salveSucess && (
+          <Stack className='alert' sx={{ width: '100%' }} spacing={2}>
+            <Alert severity='info'>
+              <AlertTitle>Sucesso!</AlertTitle>
+            A notícia foi salva.
+            </Alert>
+          </Stack>
+        )}
       </Container>
     </Main>
   )

@@ -93,36 +93,10 @@ export const Container = styled.div`
     }
 
     .buttons {
+      width: 100%;
       display: flex;
       justify-content: center;
       gap: 25px;
-    }
-
-    .button-salve,
-    .button-publish {
-        width: 40%;
-        height: 45px;
-        border: none;
-        border-radius: 5px;
-
-        margin-top: 15px;
-
-        background-color: #3366FF;
-        color: #fff;
-
-        font-size: 18px;
-        font-weight: bold;
-        text-transform: uppercase;
-
-        transition: all .3s;
-    }
-
-    .button-salve {
-      background-color: #12c75d;
-    }
-
-    .button-salve:hover {
-      background-color: #0e9e4a;
     }
 
     .button-publish:hover {
@@ -133,5 +107,14 @@ export const Container = styled.div`
       display: flex;
       flex-direction: column;
       gap: 15px
+    }
+
+    .alert {
+      position: fixed;
+      top: 70px;
+      right: 0;
+      width: 300px;
+      z-index: 1;
+      transition: .5s;
     }
 `
