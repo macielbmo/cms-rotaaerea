@@ -7,70 +7,43 @@ export const Container = styled.div`
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.07);
     margin-bottom: 64px;
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
+    .table-head {
+      background-color: #e0e0e0;
     }
 
-    thead {
-        font-size: 12px;
-        color: ${({ theme }) => theme.colors.primary.dark};
-        background-color: ${({ theme }) => theme.colors.backgroundColor};
-        text-align: left;
+    .collumn-title {
+      font-weight: 900;
+      width: 30%;
     }
 
-    .row {
-        padding: 10px;
-        border: none;
-        border-bottom: 1px solid #ccc;
+    .collumn-status {
+      display: flex;
+      justify-content: flex-end;
     }
 
-    .row th {
-        padding: 7px;
-        font-weight: 600;
-    }
-
-    .row td {
-        padding: 7px;
-        font-size: 13px;
-        color: ${({ theme }) => theme.colors.primary.dark};
-    }
-
-    .row .title {
-        font-weight: 700;
-        font-size: 14px;
-        max-width: 200px;
-        word-wrap: break-word;
-    }
-
-    .options {
-        cursor: pointer;
-        width: 35px;
-        height: 100%;
-    }
-
-    .btn-action {
-        cursor: pointer;
-        font-size: 18px;
-    }
-
-    .btn-plus-news {
+    .table-footer {
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
 
-      margin-top: 25px;
-
-      button {
-        padding: 10px 15px;
-        border: none;
-        transition: .5s;
-        border-radius: 14px;
-      }
+      margin: 25px 0 10px;
 
       button:hover {
         background: ${({ theme }) => theme.colors.gray.lighter};
+        color: ${({ theme }) => theme.colors.gray.dark};
+      }
+    }
+
+    .link-components {
+      a {
+        text-decoration: none; /* Remove sublinhado padrão */
+        color: inherit; /* Herda a cor do texto do elemento pai */
+        cursor: pointer; /* Muda o cursor para indicar que é clicável */
+      }
+
+      a:hover {
+        color: inherit; /* Herda a cor do texto no estado de hover */
       }
     }
 `

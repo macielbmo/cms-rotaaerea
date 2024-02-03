@@ -1,36 +1,55 @@
-import styles from './login.module.css'
 import bg from './bg.jpg'
+
+// Material-UI
+import Input from '@mui/material/Input'
+import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
+
+// Styled - CSS
+import { Container } from './styles'
 
 export function Login (): JSX.Element {
   return (
-    <>
-      <div className={styles.container}>
-        <form className={styles['login-modal']}>
-          <h1 className={styles.title}>Login</h1>
+    <Container>
+      <form className='login-modal'>
+        <h1 className='title'>Login</h1>
 
-          <div className={styles.modal}>
-            <label className={styles['label-text']} htmlFor="email">E-mail</label>
-            <input className={styles['input-text']} type="email" id="email" />
+        <div className='modal'>
+          <div className='box-input'>
+            <TextField
+              className='input'
+              id='outlined-basic'
+              type='email'
+              label='E-mail'
+              variant='outlined'
+              size='small'
+              required
+            />
 
-            <label className={styles['label-text']} htmlFor="password">Senha</label>
-            <input className={styles['input-text']} type="password" name="password" id="password" />
-
-            <div className={styles.inputSecundary}>
-              <div>
-                <input type="checkbox" name="fixe-login" id="fixe-login" />
-                <label htmlFor="fixe-login">Mantenha-me logado</label>
-              </div>
-              <a href="">Esqueceu sua senha?</a>
-            </div>
-
-            <button className={styles.button} type="submit">Entrar</button>
+            <TextField
+              className='input'
+              id='outlined-basic'
+              type='password'
+              label='Senha'
+              variant='outlined'
+              size='small'
+              required
+            />
           </div>
-        </form>
 
-        <div className={styles['login-img']}>
-          <img className={styles['img-bg']} src={bg} alt="" />
+          <div className='inputSecundary'>
+            <div>
+              <FormControlLabel control={<Checkbox size='small'/>} label='Ficar conectado' className='checkbox'/>
+            </div>
+            <a href="">Esqueceu sua senha?</a>
+          </div>
+
+          <Button variant='contained' fullWidth className='button'>Entrar</Button>
         </div>
+      </form>
+
+      <div className='login-img'>
+        <img className='img-bg' src={bg} alt="" />
       </div>
-    </>
+    </Container>
   )
 }

@@ -9,7 +9,7 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-top: 20px;
+        margin: 20px 0;
     }
 
     .header h1 {
@@ -17,17 +17,15 @@ export const Container = styled.div`
         color: ${({ theme }) => theme.colors.primary.dark};
     }
 
-    .btn-NewNews {
-        padding: 5px 10px;
-        border-radius: 7px;
-        font-size: 12px;
+    .btn-new-news {
+        font-size: 11px;
 
         background-color: ${({ theme }) => theme.colors.primary.main};
         color: ${({ theme }) => theme.colors.primary.lighter};
         transition: all .5s;
     }
 
-    .btn-NewNews:hover {
+    .btn-new-news:hover {
         background-color: ${({ theme }) => theme.colors.primary.dark};
         color: ${({ theme }) => theme.colors.primary.lighter};
         font-weight: 700;

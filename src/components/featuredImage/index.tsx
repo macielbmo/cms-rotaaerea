@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Container } from './styles'
 
+// Material-UI
+import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined'
+
 interface FeaturedImageProps {
   urlImg: string
   descriptionImg: string
@@ -62,7 +65,11 @@ export default function FeaturedImage (props: FeaturedImageProps): JSX.Element {
             <p>Sem imagem</p>
           </div>)}
 
-      <input className='input-upload-image' type="file" accept='image/*' onChange={uploadImage} required= {props.required}/>
+      <div className='button-upload-img'>
+        <label htmlFor='uploadImage'><BackupOutlinedIcon /> Enviar Foto</label>
+
+        <input id='uploadImage' name='uploadImage' type="file" accept='image/*' onChange={uploadImage} required= {props.required}/>
+      </div>
     </Container>
   )
 }

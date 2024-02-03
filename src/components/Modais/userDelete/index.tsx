@@ -9,7 +9,7 @@ import imgAttention from '../../../assets/img/img-modal/attention.png'
 
 interface ModalProps {
   setModal: () => void
-  userId: string
+  idUser: string
 }
 
 export default function UserDelete (props: ModalProps): JSX.Element {
@@ -18,7 +18,7 @@ export default function UserDelete (props: ModalProps): JSX.Element {
   const [mensageConfirm, setMensageConfirm] = useState(false)
   const [mensageError, setMesageError] = useState(false)
 
-  function handleDeleteUser (): promises {
+  function handleDeleteUser (): any {
     reqDeleteUser(props.idUser)
       .catch((error) => {
         console.log('Erro ao excluir usuário: ', error)

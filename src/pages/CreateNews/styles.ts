@@ -27,6 +27,20 @@ export const Container = styled.div`
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.09);
     }
 
+    .section-one {
+      display: flex;
+      gap: 24px;
+      width: 100%;
+    }
+
+    .row-1 {
+      width: 60%;
+
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
     .form-news {
         width: 100%;
         display: flex;
@@ -38,13 +52,36 @@ export const Container = styled.div`
         font-size: 14px;
     }
 
+    .title {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
     .input-content label{
       margin-bottom: 5px;
       font-size: 18px;
     }
 
+    .source-news {
+      display: flex;
+      gap: 18px;
+    }
+
+    .row-2 {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
     .input-image label{
       font-size: 18px;
+    }
+
+    .input-image .source-img {
+      margin-top: 14px;
     }
 
     .category-select > label{

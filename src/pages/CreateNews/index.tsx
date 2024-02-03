@@ -1,13 +1,16 @@
 import { type FormEvent, useState, useEffect } from 'react'
 
+// Styles
 import { Main } from '../../assets/styles/global'
 import { Container } from './styles'
 
+// Components
 import Editor from '../../components/editor'
 import FeaturedImage from '../../components/featuredImage'
-import InputText from '../../components/inputs/inputText'
 import InputTags from '../../components/inputs/inputTags'
-import { BiLogoLess } from 'react-icons/bi'
+
+// Material-UI
+import { FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material'
 
 export default function CreateNews (): JSX.Element {
   const [newsData, setNewsData] = useState({
@@ -116,9 +119,10 @@ export default function CreateNews (): JSX.Element {
     }))
   }
 
+  // Fetch - Registra noticia
   const registerNews = async () => {
     try {
-      const url = 'http://localhost:3001/news'
+      const url = `${process.env.API_URL}/news`
 
       const response = await fetch(url, {
         method: 'POST',
@@ -149,8 +153,11 @@ export default function CreateNews (): JSX.Element {
     }
   }, [publish])
 
+  // Fetch - Buscar categorias
   useEffect(() => {
-    fetch('http://localhost:3001/categories')
+    const url = process.env.API_URL
+
+    fetch(`${url}/categories`)
       .then(async (response) => {
         const json = await response.json()
 
@@ -170,133 +177,187 @@ export default function CreateNews (): JSX.Element {
         </div>
 
         <form>
-          <div className='form-news'>
-            <InputText
-              label='Título da notícia'
-              type='text'
-              id='title-news'
-              name='title'
-              placeholder='Digite o título'
-              value={newsData.title}
-              required={true}
-              onChange={handleInputChange}
-            />
+          <section className='section-one'>
+            <div className='row-1'>
+              <div className='title'>
+                <TextField
+                  id='outlined-basic'
+                  label='Título'
+                  variant='outlined'
+                  size='small'
+                  fullWidth
 
-            <InputText
-              label='Subtítulo'
-              type='text'
-              id='sub-title'
-              name='subtitle'
-              placeholder='Digite o subtítulo'
-              value={newsData.subtitle}
-              required={false}
-              onChange={handleInputChange}
-            />
+                  name='title'
+                  type='text'
+                  required
+                  value={newsData.title}
+                  onChange={handleInputChange}
+                />
 
-            <div className='input-content'>
-              <label htmlFor="content">Conteúdo</label>
-              <Editor
-                editorContent={newsData.content}
-                handleContent={handleContent} />
-            </div>
+                <TextField
+                  id='outlined-basic'
+                  label='Subtítulo'
+                  variant='outlined'
+                  size='small'
+                  fullWidth
 
-            <InputText
-              label='Nome do autor'
-              type='text'
-              id='author'
-              name='author'
-              placeholder='Nome do autor'
-              value={newsData.author}
-              required={true}
-              onChange={handleInputChange}
-            />
+                  name='subtitle'
+                  type='text'
+                  value={newsData.subtitle}
+                  onChange={handleInputChange}
+                />
+              </div>
 
-            <InputText
-              label='Nome da fonte da notícia'
-              type='text'
-              id='sourse'
-              name='sourceNews'
-              placeholder='Digite o nome da fonte'
-              value={newsData.sourceNews}
-              onChange={handleInputChange}
-            />
+              <div className='input-content'>
+                <label htmlFor="content">Conteúdo</label>
+                <Editor
+                  editorContent={newsData.content}
+                  handleContent={handleContent} />
+              </div>
 
-            <InputText
-              label='URL da fonte da notícia'
-              type='text'
-              id='urlSource'
-              name='urlSource'
-              placeholder='Digite a URL da fonte'
-              value={newsData.urlSource}
-              onChange={handleInputChange}
-            />
+              <div className='author'>
+                <TextField
+                  id='outlined-basic'
+                  label='Nome do autor'
+                  variant='outlined'
+                  size='small'
+                  fullWidth
 
-            <div className='input-image'>
-              <label>Imagem de destaque</label>
-              <FeaturedImage
-                urlImage={newsData.urlImg}
-                descriptionImg={newsData.descriptionImg}
-                handleInputChange={handleInputChange}
-                handleImg={handleImg}
-                required={true}
-              />
+                  name='author'
+                  type='text'
+                  value={newsData.author}
+                  required={true}
+                  onChange={handleInputChange}
+                />
+              </div>
 
-              <InputText
-                label='Fonte da imagem'
-                type='text'
-                id='descriptionImg'
-                name='descriptionImg'
-                placeholder='Digite a fonte da imagem'
-                value={newsData.descriptionImg}
-                required={true}
-                onChange={handleInputChange}
-              />
-            </div>
+              <div className='source-news'>
+                <TextField
+                  id='outlined-basic'
+                  label='Nome da fonte da notícia'
+                  variant='outlined'
+                  size='small'
+                  fullWidth
 
-            <div className='category-select'>
-              <label>Escolha uma categoria</label>
+                  name='sourceNews'
+                  type='text'
+                  value={newsData.sourceNews}
+                  onChange={handleInputChange}
+                />
 
-              <div className='select-category'>
-                {categories
-                  ? (
-                      categories.map((category) => (
-                      <label key={category.id} htmlFor={category.name}>
+                <TextField
+                  id='outlined-basic'
+                  label='URL fonte da notícia'
+                  variant='outlined'
+                  size='small'
+                  fullWidth
 
-                        <input
-                          type="radio"
-                          name="category"
-                          value={category.name}
-                          id={category.name}
-                          checked={newsData.category === category.name}
-                          required
-                          onChange={(e) => { handleCategory(e.target.value) }} />
-
-                        {category.name}
-                      </label>
-                      ))
-                    )
-                  : null}
+                  name='urlSource'
+                  type='text'
+                  value={newsData.urlSource}
+                  onChange={handleInputChange}
+                />
               </div>
             </div>
 
-            <InputTags
-              handleTags={handleTags}
-            />
+            <div className='row-2'>
+              <div className='input-image'>
+                <label>Imagem de destaque</label>
 
-            <InputText
-              label='Agendar postagem'
-              type='datetime-local'
-              id='dateTimeInput'
-              name='toSchedule'
-              value={newsData.toSchedule}
-              onChange={handleInputChange}
-            />
+                <FeaturedImage
+                  urlImage={newsData.urlImg}
+                  descriptionImg={newsData.descriptionImg}
+                  handleInputChange={handleInputChange}
+                  handleImg={handleImg}
+                  required={true}
+                />
 
+                <TextField
+                  id='outlined-basic'
+                  className='source-img'
+                  label='Fonte da imagem'
+                  variant='outlined'
+                  size='small'
+                  fullWidth
+
+                  name='descriptionImg'
+                  type='text'
+                  value={newsData.descriptionImg}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div className='category-select'>
+                <FormLabel id="demo-radio-buttons-group-label">Escolha uma categoria</FormLabel>
+
+                <div className='select-category'>
+                  <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    name="radio-buttons-group"
+                  >
+                    {categories
+                      ? (
+                          categories.map((category) => (
+                          <FormControlLabel
+                            key={category.name}
+                            value={category.name}
+                            control={
+                              <Radio
+                                checked={newsData.category === category.name}
+                                required
+                                onChange={(e) => { handleCategory(e.target.value) }}
+                              />}
+                            label={category.name}/>
+
+                          ))
+                        )
+                      : null}
+
+                    {/* <label key={category.id} htmlFor={category.name}>
+
+                      <input
+                        type="radio"
+                        name="category"
+                        value={category.name}
+                        id={category.name}
+                        checked={newsData.category === category.name}
+                        required
+                        onChange={(e) => { handleCategory(e.target.value) }} />
+
+                      {category.name}
+                    </label> */}
+                  </RadioGroup>
+                </div>
+              </div>
+
+              <InputTags
+                handleTags={handleTags}
+              />
+
+              <div>
+                <label>Agendar postagem</label>
+                <TextField
+                  id='outlined-basic'
+                  variant='outlined'
+                  size='small'
+                  fullWidth
+
+                  name='toSchedule'
+                  type='datetime-local'
+                  value={newsData.toSchedule}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+            </div>
+          </section>
+
+          <section className='section-tow'>
             <div className='buttons'>
               <button className='button-salve' onClick={handleSalve}>Salvar</button>
               <button className='button-publish' onClick={handlePublish}>Publicar Post</button>
             </div>
-          </div>
+          </section>
         </form>
       </Container>
     </Main>
