@@ -112,6 +112,7 @@ export default function CreateNews (): JSX.Element {
     }))
   }
 
+  // Função para limpar o formulário após a publicação ou salvamento
   // function handleClearForm (): void {
   //   setNewsData(() => ({
   //     title: '',
@@ -295,7 +296,6 @@ export default function CreateNews (): JSX.Element {
                 <label>Imagem de destaque</label>
 
                 <FeaturedImage
-                  descriptionImg={newsData.descriptionImg}
                   handleInputChange={handleInputChange}
                   handleImg={handleImg}
                   required={true}

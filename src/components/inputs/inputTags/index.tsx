@@ -6,17 +6,14 @@ import { Container } from './style'
 
 interface InputTagsProps {
   handleTags: (tags: string[]) => void
+  tags?: string[]
 }
 
-interface InputTagsState {
-  tags: string[]
-}
-
-export default class InputTags extends Component<InputTagsProps, InputTagsState> {
+export default class InputTags extends Component<InputTagsProps> {
   constructor (props: InputTagsProps) {
     super(props)
     this.state = {
-      tags: []
+      tags: Array.isArray(props.tags) ? [...props.tags] : []
     }
   }
 

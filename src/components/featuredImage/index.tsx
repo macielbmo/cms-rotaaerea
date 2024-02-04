@@ -5,15 +5,26 @@ import { Container } from './styles'
 import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined'
 
 interface FeaturedImageProps {
+  handleInputChange?: () => void
   urlImg?: string
-  descriptionImg: string
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleImg: (url: string) => void
   required: boolean
 }
 
 export default function FeaturedImage (props: FeaturedImageProps): JSX.Element {
   const [imageUrl, setImgeUrl] = useState('')
+
+  useEffect(() => {
+    console.log(`AQUI É UM TESTE: ${props.urlImg}`)
+  })
+
+  useEffect(() => {
+    if (props.urlImg !== undefined) {
+      setImgeUrl(props.urlImg)
+      // console.log('props.urlImg:', props.urlImg)
+    }
+    // console.log('props.urlImg:', props.urlImg)
+  }, [props.urlImg])
 
   const uploadImage = async (e: any): Promise<void> => {
     const file = e.target.files[0]
@@ -45,25 +56,26 @@ export default function FeaturedImage (props: FeaturedImageProps): JSX.Element {
 
   // console.log('props.urlImg:', props.urlImg)
 
-  useEffect(() => {
-    if (props.urlImg !== undefined) {
-      setImgeUrl(props.urlImg)
-      // console.log('props.urlImg:', props.urlImg)
-    }
-    // console.log('props.urlImg:', props.urlImg)
-  }, [props.urlImg])
-
   return (
     <Container>
       {imageUrl !== ''
         ? (
           <div className='box-image'>
             <img className='image' src={imageUrl} alt="image" />
-          </div>)
-        : (
-          <div className='no-image'>
-            <p>Sem imagem</p>
-          </div>)}
+          </div>
+        )
+        : props.urlImg !== undefined && props.urlImg !== ''
+          ? (
+            <div className='box-image'>
+              <img className='image' src={props.urlImg} alt="image" />
+            </div>
+          )
+          : (
+            <div className='no-image'>
+              <p>Sem imagem</p>
+            </div>
+          )
+      }
 
       <div className='button-upload-img'>
         <label htmlFor='uploadImage'><BackupOutlinedIcon /> Enviar Foto</label>
