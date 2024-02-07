@@ -34,7 +34,7 @@ interface newsProps {
 export function NewsList ({ news }: newsProps): JSX.Element {
   const [sizeList, setSizeList] = useState(10)
 
-  const options: DateTimeFormatOptions = {
+  const options: Intl.DateTimeFormatOptions = {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',

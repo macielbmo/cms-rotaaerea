@@ -90,7 +90,7 @@ export default function EditNews (): JSX.Element {
     }))
   }
 
-  function handleSalve (e: FormEvent): void {
+  async function handleSalve (e: FormEvent): Promise<void> {
     e.preventDefault()
     const name = 'status'
 
@@ -100,6 +100,7 @@ export default function EditNews (): JSX.Element {
     }))
 
     setPublish(!publish)
+    await updateNews()
   }
 
   function handleClearForm (): void {
@@ -370,7 +371,7 @@ export default function EditNews (): JSX.Element {
                     </div>
 
                     <div className='buttons'>
-                      <Button fullWidth variant='contained' onClick={async () => { await updateNews() }}>Salvar</Button>
+                      <Button fullWidth variant='contained' onClick={handleSalve}>Salvar</Button>
                     </div>
                   </div>
                 </section>
