@@ -4,11 +4,11 @@ import { SlOptions } from 'react-icons/sl'
 import { Icon, Menu } from './styles'
 // import UserDelete from '../../../Modais/userDelete'
 
-// interface OptionsProps {
-//   userId: string
-// }
+interface OptionsProps {
+  userId: string
+}
 
-export default function Options (): JSX.Element {
+export default function Options (props: OptionsProps): JSX.Element {
   const [modalDelete, setModalDelete] = useState(false)
   const [options, setOptions] = useState(false)
 
@@ -43,7 +43,7 @@ export default function Options (): JSX.Element {
         <Menu>
           <div>
             <ul>
-              <li>Ver detalhes</li>
+              <li id={props.userId}>Ver detalhes</li>
               <li>Editar</li>
               <li onClick={toggleModalDelete}>Excluir</li>
             </ul>
