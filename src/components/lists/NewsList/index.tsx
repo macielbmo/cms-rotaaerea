@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { Container } from './styles'
 
 // Componentes
-import Options from './options'
 import ActiveStatus from './status/active'
 import DisabledStatus from './status/disabled'
 
@@ -30,16 +29,10 @@ interface UserListProps {
   }]
 }
 
-const optionsMenu = [
-  'Editar',
-  'Ativar',
-  'Desativar'
-]
-
 export function NewsList ({ news }: UserListProps): JSX.Element {
   const [sizeList, setSizeList] = useState(10)
 
-  const options = {
+  const options: DateTimeFormatOptions = {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
@@ -49,7 +42,7 @@ export function NewsList ({ news }: UserListProps): JSX.Element {
 
   function plusList (): void {
     setSizeList(sizeList + 10)
-  };
+  }
 
   return (
     <Container>

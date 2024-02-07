@@ -12,7 +12,7 @@ export default function Options (props: OptionsProps): JSX.Element {
   const [modalDelete, setModalDelete] = useState(false)
   const [options, setOptions] = useState(false)
 
-  const menuRef = useRef(null)
+  const menuRef = useRef<HTMLDivElement | null>(null)
 
   function toggleModalDelete (): void {
     setModalDelete(!modalDelete)

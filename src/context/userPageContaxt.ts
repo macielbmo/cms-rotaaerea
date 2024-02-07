@@ -1,5 +1,5 @@
 import { createContext } from 'react'
 
-const userPageContext = createContext()
+const userPageContext = createContext<unknown>(null)
 
 export default userPageContext

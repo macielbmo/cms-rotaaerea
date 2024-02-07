@@ -5,7 +5,7 @@ import { Container } from './styles'
 import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined'
 
 interface FeaturedImageProps {
-  handleInputChange?: () => void
+  handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   urlImg?: string
   handleImg: (url: string) => void
   required: boolean

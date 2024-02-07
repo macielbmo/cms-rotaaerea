@@ -3,10 +3,12 @@ import Options from './options'
 import ActiveStatus from './status/active'
 // import DisabledStatus from './status/disabled'
 
+interface Category {
+  name: string
+}
+
 interface UserListProps {
-  categorys: [{
-    name: string
-  }]
+  categorys: Category[]
 }
 
 export function CategoryList ({ categorys }: UserListProps): JSX.Element {

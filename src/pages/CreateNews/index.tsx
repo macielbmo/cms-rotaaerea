@@ -12,6 +12,10 @@ import InputTags from '../../components/inputs/inputTags'
 // Material-UI
 import { Alert, AlertTitle, Button, FormControlLabel, FormLabel, Radio, RadioGroup, Stack, TextField } from '@mui/material'
 
+interface Category {
+  name: string
+}
+
 interface newsData {
   title: string
   subtitle: string
@@ -43,14 +47,15 @@ export default function CreateNews (): JSX.Element {
     status: true
   })
 
-  const [categories, setCategories] = useState()
+  const [categories, setCategories] = useState<Category>()
   const [publish, setPublish] = useState(false)
 
   // Mensagem de Alerta
   const [publishSucess, setPublishSucess] = useState(false)
   const [salveSucess, setSalveSucess] = useState(false)
 
-  function timeAlertPublishSucess () {
+  // Function mensagem de alerta
+  function timeAlertPublishSucess (): void {
     setPublishSucess(true)
 
     const timeoutId = setTimeout(() => {
@@ -60,8 +65,7 @@ export default function CreateNews (): JSX.Element {
 
     return () => { clearTimeout(timeoutId) }
   }
-
-  function timeAlertSalveSucess () {
+  function timeAlertSalveSucess (): void {
     setSalveSucess(true)
 
     const timeoutId = setTimeout(() => {
@@ -72,6 +76,7 @@ export default function CreateNews (): JSX.Element {
     return () => { clearTimeout(timeoutId) }
   }
 
+  // Funtion para salvar dados no useState newsData
   function handleContent (value: string): void {
     const name = 'content'
     setNewsData(prevNewsData => ({
@@ -79,7 +84,6 @@ export default function CreateNews (): JSX.Element {
       [name]: value
     }))
   }
-
   function handleImg (url: any): void {
     const name = 'urlImg'
     setNewsData(prevNewsData => ({
@@ -87,7 +91,6 @@ export default function CreateNews (): JSX.Element {
       [name]: url
     }))
   }
-
   function handleCategory (e: any): void {
     const name = 'category'
     setNewsData(prevNewsData => ({
@@ -95,7 +98,6 @@ export default function CreateNews (): JSX.Element {
       [name]: e
     }))
   }
-
   function handleTags (tags: any): void {
     const name = 'tags'
     setNewsData(prevNewsData => ({
@@ -103,7 +105,6 @@ export default function CreateNews (): JSX.Element {
       [name]: tags
     }))
   }
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setNewsData(prevNewsData => ({
@@ -164,12 +165,15 @@ export default function CreateNews (): JSX.Element {
         throw new Error('Erro ao publicar noticia')
       }
 
-      const data = await response.json()
-      // console.log('Noticia publicada com sucesso:', data)
-      timeAlertPublishSucess()
-      // handleClearForm()
+      // const data = await response.json()
+
+      if (newsData.status) {
+        timeAlertPublishSucess()
+      } else {
+        timeAlertSalveSucess()
+      }
     } catch (error) {
-      // console.log('Erro ao publicar noticia:', error)
+      console.error('Erro ao publicar noticia:', error)
     }
     // console.log(newsData)
   }

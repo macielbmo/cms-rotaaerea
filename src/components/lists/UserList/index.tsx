@@ -1,11 +1,11 @@
 import { Container } from './styles'
 import Options from './options'
 import ActiveStatus from './status/active'
-import DisabledStatus from './status/disabled'
+// import DisabledStatus from './status/disabled'
 
 interface UserListProps {
   users: [{
-    id: number
+    id: string
     name: string
     email: string
     cpf: string
