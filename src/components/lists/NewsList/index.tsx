@@ -16,6 +16,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
+import LongMenu from './LongMenu'
 
 interface UserListProps {
   news: [{
@@ -97,9 +98,10 @@ export function NewsList ({ news }: UserListProps): JSX.Element {
                 </TableCell>
 
                 <TableCell align='right'>
-                  <Options
-                    newsId={row.id}
+                  <LongMenu
                     key={row.id}
+                    newsId={row.id}
+                    status={row.status}
                   />
                 </TableCell>
               </TableRow>
