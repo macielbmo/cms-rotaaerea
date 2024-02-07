@@ -23,6 +23,11 @@
     "sourceMap": true,
     "outDir": "dist",
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "types/**/*.d.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "types/**/*.d.ts",
+    "quill-image-resize-module-react.d.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }],
 }

@@ -1,7 +1,7 @@
 import { Container } from './styles'
 import Options from './options'
 import ActiveStatus from './status/active'
-import DisabledStatus from './status/disabled'
+// import DisabledStatus from './status/disabled'
 
 interface UserListProps {
   categorys: [{

@@ -35,11 +35,11 @@ export default function Editor (props: EditorProps): JSX.Element {
   }
 
   const VideoBlot = Quill.import('formats/video')
-  const Parchment = Quill.import('parchment')
+  // const Parchment = Quill.import('parchment')
   const Link = Quill.import('formats/link')
 
   class VideoWithLink extends VideoBlot {
-    static create (value) {
+    static create (value: any) {
       const node = super.create(value)
       if (value) {
         node.innerHTML = `<iframe frameborder="0" allowfullscreen="true" src="${value}"></iframe>`

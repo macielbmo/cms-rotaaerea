@@ -5,7 +5,7 @@ import { Icon, Menu } from './styles'
 
 export default function Options (): JSX.Element {
   const [options, setOptions] = useState(false)
-  const menuRef = useRef(null)
+  const menuRef = useRef<HTMLDivElement | null>(null)
 
   function toggleOptions (): void {
     setOptions(!options)

@@ -43,7 +43,7 @@ export default function LongMenu (props: LongMenuProps) {
         throw new Error('Erro ao carregar os dados')
       }
     } catch (error) {
-      throw new Error(error)
+      console.error('Erro ao carregar os dados:', error)
     }
 
     window.location.reload()
@@ -76,13 +76,13 @@ export default function LongMenu (props: LongMenuProps) {
           }
         }}
       >
-        <Link to={`/noticias/editar/${props.newsId}`}>
-          <MenuItem key={'editar'} selected={'editar'} onClick={handleClose}>
+        <Link to={`/noticias/editar/${props.newsId}`} onClick={handleClose}>
+          <MenuItem key={'editar'} >
             Editar
           </MenuItem>
         </Link>
 
-        <MenuItem key={'editar'} selected={'editar'} onClick={handleClcikStatus}>
+        <MenuItem key={'editar'} onClick={handleClcikStatus}>
           {props.status ? ('Desativar') : ('Ativar')}
         </MenuItem>
       </Menu>

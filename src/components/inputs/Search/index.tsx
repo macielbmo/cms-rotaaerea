@@ -5,7 +5,7 @@ export default function Search (): JSX.Element {
   const [radioSelect, setRadioSelect] = useState<string>('nome')
 
   function handleRadioChange (e: React.ChangeEvent<HTMLInputElement>): void {
-    const { name, value } = e.target
+    const { value } = e.target
     setRadioSelect(value)
   }
 

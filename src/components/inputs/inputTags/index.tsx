@@ -9,7 +9,11 @@ interface InputTagsProps {
   tags?: string[]
 }
 
-export default class InputTags extends Component<InputTagsProps> {
+interface InputTagsState {
+  tags: string[]
+}
+
+export default class InputTags extends Component<InputTagsProps, InputTagsState> {
   constructor (props: InputTagsProps) {
     super(props)
     this.state = {

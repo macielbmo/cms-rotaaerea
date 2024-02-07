@@ -19,19 +19,20 @@ export default function UserDelete (props: ModalProps): JSX.Element {
   const [mensageError, setMesageError] = useState(false)
 
   function handleDeleteUser (): any {
-    reqDeleteUser(props.idUser)
-      .catch((error) => {
-        console.log('Erro ao excluir usuário: ', error)
-      })
+    reqDeleteUser(props.idUser).catch(error => {
+      console.error('Erro ao excluir o usuário: ', error)
+    })
   }
 
-  async function reqDeleteUser (userId: string): Response {
+  async function reqDeleteUser (userId: any): Promise<void> {
     setLoading(true)
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000))
 
-      const response = await fetch(`https://rotaaerea-backend.vercel.app/users/${props.userId}`, {
+      const URL = process.env.API_URL
+
+      const response = await fetch(`${URL}/users/${userId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -48,7 +49,7 @@ export default function UserDelete (props: ModalProps): JSX.Element {
       setMensageConfirm(true)
       console.log('Item excluído com sucesso.')
     } catch (error) {
-      console.error('Erro ao excluir o usuário: ', error.message)
+      console.error('Erro ao excluir o usuário: ', error)
     }
   }
 
