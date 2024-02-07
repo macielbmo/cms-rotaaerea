@@ -47,7 +47,7 @@ export default function CreateNews (): JSX.Element {
     status: true
   })
 
-  const [categories, setCategories] = useState<Category>()
+  const [categories, setCategories] = useState<Category[]>()
   const [publish, setPublish] = useState(false)
 
   // Mensagem de Alerta
@@ -55,7 +55,7 @@ export default function CreateNews (): JSX.Element {
   const [salveSucess, setSalveSucess] = useState(false)
 
   // Function mensagem de alerta
-  function timeAlertPublishSucess (): void {
+  function timeAlertPublishSucess (): () => void {
     setPublishSucess(true)
 
     const timeoutId = setTimeout(() => {
@@ -65,7 +65,7 @@ export default function CreateNews (): JSX.Element {
 
     return () => { clearTimeout(timeoutId) }
   }
-  function timeAlertSalveSucess (): void {
+  function timeAlertSalveSucess (): () => void {
     setSalveSucess(true)
 
     const timeoutId = setTimeout(() => {

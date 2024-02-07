@@ -9,11 +9,15 @@ import FeaturedImage from '../../components/featuredImage'
 import InputTags from '../../components/inputs/inputTags'
 
 // Material-UI
-import { Alert, AlertTitle, Button, FormControlLabel, FormLabel, Radio, RadioGroup, Stack, TextField } from '@mui/material'
+import { Button, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material'
 
+// Interface
 interface RouteParams {
   id: string
   [key: string]: string | undefined
+}
+interface Category {
+  name: string
 }
 
 export default function EditNews (): JSX.Element {
@@ -37,7 +41,7 @@ export default function EditNews (): JSX.Element {
   })
 
   const [statusNewsData, setStatusNewsData] = useState(false)
-  const [categories, setCategories] = useState()
+  const [categories, setCategories] = useState<Category[]>()
   const [publish, setPublish] = useState(false)
 
   function handleContent (value: any): void {

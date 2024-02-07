@@ -6,8 +6,18 @@ import { Main } from '../../assets/styles/global'
 import { Container } from './styles'
 import { Button } from '@mui/material'
 
+interface news {
+  id: string
+  title: string
+  author: string
+  category: string
+  category_news_name: string
+  created_at: string
+  status: boolean
+}
+
 export function News (): JSX.Element {
-  const [dataNews, setNewsData] = useState([])
+  const [dataNews, setNewsData] = useState<news[]>([])
 
   useEffect(() => {
     fetch('https://rotaaerea-backend.vercel.app/news', {

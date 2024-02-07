@@ -3,14 +3,16 @@ import Options from './options'
 import ActiveStatus from './status/active'
 // import DisabledStatus from './status/disabled'
 
+interface user {
+  id: string
+  name: string
+  email: string
+  cpf: string
+  type: string
+}
+
 interface UserListProps {
-  users: [{
-    id: string
-    name: string
-    email: string
-    cpf: string
-    type: string
-  }]
+  users: user[]
 }
 
 export function UserList ({ users }: UserListProps): JSX.Element {

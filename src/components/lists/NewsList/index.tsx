@@ -17,19 +17,21 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import LongMenu from './LongMenu'
 
-interface UserListProps {
-  news: [{
-    id: string
-    title: string
-    author: string
-    category: string
-    category_news_name: string
-    created_at: string
-    status: boolean
-  }]
+interface news {
+  id: string
+  title: string
+  author: string
+  category: string
+  category_news_name: string
+  created_at: string
+  status: boolean
 }
 
-export function NewsList ({ news }: UserListProps): JSX.Element {
+interface newsProps {
+  news: news[]
+}
+
+export function NewsList ({ news }: newsProps): JSX.Element {
   const [sizeList, setSizeList] = useState(10)
 
   const options: DateTimeFormatOptions = {
